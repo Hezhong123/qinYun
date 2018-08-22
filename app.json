@@ -1,11 +1,9 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/marke/marke",
-    "pages/mymk/mymk",
-    "pages/cnanvans/cnanvans",
-    "pages/my/my"
+    "pages/goods/goods",
+    "pages/my/my",
+    "pages/logs/logs"   
   ],
   "window":{
     "backgroundTextStyle":"light",

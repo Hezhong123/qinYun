@@ -1,4 +1,4 @@
-// pages/mymk/mymk.js
+// pages/goods/goods.js
 Page({
 
   /**

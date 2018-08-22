@@ -27,7 +27,7 @@ Page({
     let ins =e.currentTarget.dataset.cs
     console.log(ins)
     wx.navigateTo({
-      url: '../../pages/marke/marke?id=' + ins
+      url: '../../pages/goods/goods?id=' + ins
     })
   },
 
