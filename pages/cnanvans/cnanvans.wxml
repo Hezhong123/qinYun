@@ -1,0 +1,6 @@
+<!--pages/cnanvans/cnanvans.wxml-->
+<view>
+ <canvas canvas-id='myCanvas' wx:if='{{true}}' class='cans'></canvas>
+ <!-- <image src='{{img2}}'></image> -->
+  <button bindtap='getimg'>生成图片</button>
+</view>

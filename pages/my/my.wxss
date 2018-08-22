@@ -1,0 +1,30 @@
+/* pages/my/my.wxss */
+page{
+  background-color: #f6f6f6;
+}
+.myTop{
+  background-color: #fff;
+   border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 1px 2px 10px #bfbfbf;
+  display: flex;
+  justify-content: space-around;
+}
+.myitme1{
+  padding: 5px; 
+  font-size: 15px;
+  font-weight: 600px;
+  letter-spacing: 3px;
+  width: 50%;
+  text-align: center;
+}  
+
+.onitme2{
+  border-bottom: 2px solid #01eb7c;
+  border-bottom-right-radius: 10px;
+}
+
+.onitme1{
+  border-bottom: 2px solid #01eb7c;
+  border-bottom-left-radius: 10px;
+}

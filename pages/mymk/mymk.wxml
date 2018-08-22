@@ -1,0 +1,36 @@
+<!--pages/mymk/mymk.wxml-->
+<view>
+  <!-- 头部内容 -->
+  <view class='tops' >
+    <text class='t1' >aaaa：</text>
+    <textarea class='t2' placeholder='sdsdsds'>
+    </textarea>
+    <view class='bootoms'>
+      <image class='i1'></image> 
+      <text class='t3'>hez</text>
+    </view>
+  </view> 
+
+  <!-- 点赞列表 -->
+  <view class='list' >
+    <view class='lbt'>
+      <view class='bts'></view>
+      <view class='btt' >谢谢点赞的小伙伴</view>
+    </view>
+
+    <!-- 点赞的用户 -->
+    <view class='dzj'>
+        <view class='dz' wx:for="{{[1,1,1,1,1,1,1,1,1]}}">
+          <image class='txs'></image>
+          <text class='nams'>hez</text>
+        </view>
+    </view> 
+
+    <!-- 点赞 -->
+    <view class='zt'>
+      <view class='zt1'>点赞</view>
+      <view class='zt2'>我也参加</view>
+    </view>
+  </view>
+
+</view>

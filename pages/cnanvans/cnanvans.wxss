@@ -1,0 +1,7 @@
+/* pages/cnanvans/cnanvans.wxss */
+.cans{
+  width: 360px;
+  height: 585px;
+  border-radius:10px; 
+  background-color: #bfbfbf;
+}

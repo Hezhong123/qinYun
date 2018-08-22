@@ -1,0 +1,67 @@
+<!--pages/index/index.wxml-->
+<view>
+  <!-- 导航栏 -->
+  <view class='top'>
+    <!-- <view class='topTitle'>
+      青语-MK
+    </view> -->
+    <scroll-view scroll-x class='topBar'>
+     <view wx:for="{{ classtab }}" wx:key='icos' 
+      class="{{index == oni ? 'topIoc':'topIoc1'}}" bindtap='onIco' data-oni='{{index}}' >
+        分类{{index}}
+      </view>
+    </scroll-view>
+    <view class='topHx'></view>
+  
+  </view>
+
+  <!-- 卡卷 -->
+  <scroll-view class='bodys' >
+
+    <!-- 商品 -->
+    <view class='goods' wx:for='{[1,1,1,1,1,1]}' wx:key='id' >
+        <image class='goodsimg' bindtap='onvct' data-cs='{{index}}' mode='widthFix' src='../../img/02.jpeg'></image>
+        <view >
+          <view class='goodst1' bindtap='onvct' data-cs='{{index}}' >商品标题 | 商品标题商品标题商品标题商品标题</view>
+          <view class='goodtbas'>
+            <view class='goodsleft'>
+              <view class='goodsleft' style='margin-right:10px;'>
+                <image class='iocs' src='../../img/ico/sc.png'></image>
+                <view class='goodst2'>123</view>
+              </view>
+              
+              <view class='goodsleft'>
+                <image class='iocs' src='../../img/ico/gw.png'></image>
+                <view class='goodst2'>30</view>
+              </view>
+            </view>
+            <view class='goodsleft'>
+                <image class='iocs' src='../../img/ico/top.png'></image>
+                <view class='goodst2'> GET </view>
+              </view>
+          </view>
+        </view>
+    </view>
+
+    <!-- <view class='bodyKj' wx:for="{{ico}}" wx:key='icos'>
+      <image mode='scaleToFill' bindtap='onvct' data-cs='{{index}}' class='kjImg' src='{{ico[index].cover}}'></image>
+      <view class='kjIco'>
+        <view class='ico'>
+          ¥：300
+        </view>
+      </view>
+
+      <view class='kjIco1'>
+        <view class='ico1'>
+          用户:100000+
+        </view>
+      </view>
+    </view> -->
+  </scroll-view>
+
+  <!-- 索引 -->
+  <view class='miaoD' bindtap='onmy'>
+      -
+  </view>
+
+</view>

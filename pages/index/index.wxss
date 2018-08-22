@@ -1,0 +1,173 @@
+/* pages/index/index.wxss */
+page{
+  background-color: #f6f6f6;
+}
+
+/* 导航栏 */
+.top{
+  background-color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 1px 2px 10px #bfbfbf;
+}
+.topTitle{
+  font-size: 16px;
+  font-weight: 800;
+  padding-left: 3vw;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.topBar{
+  width: 100vw;
+  white-space: nowrap;
+  margin-right: 30px;
+}
+
+.topIoc{
+  background-color: #01eb7c;
+  letter-spacing: 2px;
+  font-size: 0.95rem;
+  display: inline-block;
+  margin-left: 13px;
+  padding-right: 5px;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 13px; 
+  margin-bottom: 10px;
+}
+.topIoc1{
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-left: 13px;
+  padding-right: 5px;
+  color: #c9c9c9;
+  border-radius: 13px; 
+  margin-bottom: 10px;
+}
+
+.topHx{
+  width: 100vw;
+  height: 5px;
+  background-color: #fff;
+  position: relative;
+    top: -5px;
+}
+
+/* 商品 */
+.goods{
+  padding: 15px 0 0;
+  margin-left: 7vw;
+  width: 86vw;
+  margin-bottom: 20px;
+}
+
+.goodsimg{
+  width: 100%;
+  height: 130px;
+  background-color: #c9c9c9;
+  border-radius: 5px; 
+}
+
+.goodtbas{
+  display: flex;
+  justify-content: space-between;
+}
+
+.goodsleft{
+  display: flex
+}
+
+.iocs{
+  width: 22px;
+  height: 22px;
+}
+
+.goodst1{
+  line-height: 1.2rem;
+  color: #000;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  font-weight: 800;
+  margin: 10px 0;   
+}
+
+.goodst2{
+  line-height: 23px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #bbbbbb;
+}
+
+/* 卡卷 */
+.bodys{
+  padding-bottom: 30px;
+}
+.kjImg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px; 
+  background-color: #fff; 
+}
+.bodyKj{
+  margin-top: 20px;
+  background-color: #fff;
+  height: 140vw;
+  width: 90vw;
+  margin-left: 5vw;
+  border-radius: 10px;
+  box-shadow: 1px 2px 10px #bfbfbf; 
+  position: relative;
+}
+
+.kjIco{
+  position: absolute;
+    right: -1px;
+    bottom: 70px;
+}
+.ico{
+  background-color: #fff;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  padding: 3px 10px;
+  text-align: right;
+  font-size: 13px;
+  color: #626262;
+  list-style: 2px;
+  font-weight: 700;
+}
+
+.kjIco1{
+  position: absolute;
+    right: -2px;
+    bottom: 40px;
+}
+
+.ico1{
+  background-color: #fff;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+  font-weight: 700;
+  padding: 2px 10px;
+  text-align: right;
+  font-size: 13px;
+  color: #626262;
+  list-style: 2px;
+}
+
+
+/* .锚 */
+.miaoD{
+  width: 26px;
+  height: 30px;
+  background-color: #01eb7c;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  box-shadow: 1px 2px 10px #bfbfbf; 
+  color: #fff;
+  position: fixed;
+    right: 20vw;
+    bottom: 0px;
+    
+}

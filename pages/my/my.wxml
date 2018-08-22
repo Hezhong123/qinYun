@@ -1,0 +1,12 @@
+<!--pages/my/my.wxml-->
+<view>
+  <view class='myTop'>
+      <view class=" {{ontabs == 0 ? 'myitme1 onitme1': 'myitme1'}} " bindtap='ontab' data-obj='0'>
+        参与的活动
+      </view>
+      <view class=" {{ontabs == 1 ? 'myitme1 onitme2': 'myitme1'}} " bindtap='ontab' data-obj='1'>
+        喜欢的活动
+      </view>
+  </view>
+  我的页面
+</view>
