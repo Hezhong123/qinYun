@@ -9,7 +9,7 @@
   <view class='integral' wx:if="{{maps}}" >
     <view class='mapTop'>
       <text class='mapT1'>店铺名称</text>
-      <image class='mpIco iocs ' bindtap='offMap' src='../../img/ico/gw.png' ></image>
+      <image class='mpIco iocs ' bindtap='offMap' src='../../img/ico/bh1.png' ></image>
     </view>
     
     <map id="map" 
@@ -28,7 +28,7 @@
   <!-- 积分 -->
   <view class='integral' wx:if="{{int}}" >
     <view>
-      <image class='bhIco iocs ' bindtap='offInt' src='../../img/ico/gw.png' ></image>
+      <image class='bhIco iocs ' bindtap='offInt' src='../../img/ico/bh1.png' ></image>
       <view class='intT1'>
         标题
       </view>
@@ -59,14 +59,14 @@
   <view class='goodsbar'>
     <view class='goodsleft brLeft'>
       <!-- 地图 -->
-      <image class='iocs iocsLeft' bindtap='onMap' src='../../img/ico/gw.png'></image>
+      <image class='iocs iocsLeft' bindtap='onMap' src='../../img/ico/map.png'></image>
       <!-- 客服 -->
-      <image class='iocs iocsLeft' src='../../img/ico/gw.png'></image>
+      <image class='iocs iocsLeft' src='../../img/ico/kf1.png'></image>
       <!-- 收藏 -->
       <image class='iocs iocsLeft' src='../../img/ico/sc.png'></image>
       <!-- 积分 -->
       <view class='goodsleft' bindtap='onInt' >
-        <image class='iocs' src='../../img/ico/top.png'></image>
+        <image class='iocs' src='../../img/ico/goods.png'></image>
         <view class='goodst2'> 104 </view>
       </view>
     </view>
