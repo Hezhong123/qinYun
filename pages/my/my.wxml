@@ -2,14 +2,56 @@
 <view>
   <view class='myTop'>
       <view class=" {{ontabs == 0 ? 'myitme1 onitme1': 'myitme1'}} " bindtap='ontab' data-obj='0'>
-        参与的活动
+        参与
       </view>
       <view class=" {{ontabs == 1 ? 'myitme1 onitme2': 'myitme1'}} " bindtap='ontab' data-obj='1'>
-        喜欢的活动
+        喜欢
       </view>
       <view class=" {{ontabs == 2 ? 'myitme1 onitme3': 'myitme1'}} " bindtap='ontab' data-obj='2'>
-        喜欢的活动
+        完成
       </view>
   </view>
-  我的页面
+  
+  <!-- 参与 -->
+  <view class='Goods' wx:if="{{ontabs == 0}}" >
+    <view class='myGoods' wx:for="{{[1,1,1,1,1,1,1,11,1,1,1,1,1,1]}}" >
+      <image class='myImg' mode='widthFix' src='../../img/02.jpeg' ></image>
+        <view class='myRinght'>
+          <view class='myT1' >你好收据分析 | 测试你好收据分析测试你好收据测试你好收据分</view>
+          <view class='myGodssRinght' >
+            <text class='myT2' >3333333</text>
+            <view class='myBtn1' >分享</view>
+          </view>
+        </view>
+    </view>
+  </view>
+
+  <!-- 喜欢 -->
+  <view class='Goods' wx:if="{{ontabs == 1}}" >
+    <view class='myGoods' wx:for="{{[1,1,1,1,1,1,1,11,1,1,1,1,1,1]}}" >
+      <image class='myImg' mode='widthFix' src='../../img/02.jpeg' ></image>
+        <view class='myRinght'>
+          <view class='myT1' >你好收据分析 | 测试你好收据分析测试你好收据测试你好收据分</view>
+          <view class='myGodssRinght' >
+            <text class='myT2' >3333333</text>
+            <view class='myBtn1' >$:120</view>
+          </view>
+        </view>
+    </view>
+  </view>
+
+  <!-- 完成 -->
+  <view class='Goods' wx:if="{{ontabs == 2}}" >
+    <view class='myGoods' wx:for="{{[1,1,1,1,1,1,1,11,1,1,1,1,1,1]}}" >
+      <image class='myImg' mode='widthFix' src='../../img/02.jpeg' ></image>
+        <view class='myRinght'>
+          <view class='myT1' >你好收据分析 | 测试你好收据分析测试你好收据测试你好收据分</view>
+          <view class='myGodssRinght' >
+            <text class='myT2' >已完成</text>
+            <!-- <view class='myBtn1' >分享</view> -->
+          </view>
+        </view>
+    </view>
+  </view>
+
 </view>

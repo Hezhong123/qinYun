@@ -32,3 +32,62 @@ page{
   border-bottom: 2px solid #01eb7c;
   border-bottom-left-radius: 10px;
 }
+
+/* 商品 */
+.Goods{
+  padding: 15px 0 30px;
+}
+
+/* 商品详情 */
+.myGoods{
+  width: 94vw;
+  margin-left:3vw;
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.myImg{
+  flex: 2;
+  border-radius: 5px;
+  margin-right: 10px; 
+}
+
+.myRinght{
+  flex: 3;
+  padding: 2px 0 0; 
+}
+
+.myT1{
+  font-size: 1rem;
+  color: #000;
+  letter-spacing: 1px;
+  line-height: 1.2rem;
+  font-weight: 600;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  
+}
+
+.myGodssRinght{
+  margin-top: 7px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.myT2{
+  font-size: 0.9rem;
+  color: #bfbfbf;
+  letter-spacing: 2px;
+}
+
+.myBtn1{
+  border: 1px solid #01eb7c;
+  padding: 2px 15px;
+  color: #01eb7c;
+  font-size: 0.8rem;
+  border-radius: 10px; 
+}

@@ -63,7 +63,7 @@
       <!-- 客服 -->
       <image class='iocs iocsLeft' src='../../img/ico/gw.png'></image>
       <!-- 收藏 -->
-      <image class='iocs iocsLeft' src='../../img/ico/gw.png'></image>
+      <image class='iocs iocsLeft' src='../../img/ico/sc.png'></image>
       <!-- 积分 -->
       <view class='goodsleft' bindtap='onInt' >
         <image class='iocs' src='../../img/ico/top.png'></image>
