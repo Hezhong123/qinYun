@@ -9,7 +9,7 @@
   height: 27px;
 }
 .iocsLeft{
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .goodst2{
@@ -17,6 +17,12 @@
   font-size: 0.8rem;
   letter-spacing: 2px;
   color: #bbbbbb; 
+}
+
+button{
+  display: inherit;
+  position: none;
+  background-color: #fff;
 }
 
 /* 地图 */

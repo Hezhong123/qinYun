@@ -1,11 +1,16 @@
 // pages/my/my.js
+const app = getApp()
+import hez from '../../utils/hez.js'
+const config = app.globalData 
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ontabs: 0
+    ontabs: 0,
+    intList:false
   },
 
   ontab:function(e){
@@ -19,7 +24,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log('配置', config )
+    this.setData({
+      intList: config.sets.intList
+    })
   },
 
   /**

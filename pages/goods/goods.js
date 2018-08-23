@@ -1,4 +1,6 @@
-
+const app = getApp()
+import hez from '../../utils/hez.js'
+const config = app.globalData 
 // pages/goods/goods.js
 Page({
 
@@ -8,6 +10,7 @@ Page({
   data: {
     maps:false,
     int:true,
+    ints:false,
     latitude:"",
     longitude:""
   },
@@ -36,6 +39,9 @@ Page({
           latitude: res.latitude,
           longitude: res.longitude
         })
+      },
+      fail: function(res){
+        console.log(res)
       }
     })
   },
@@ -62,18 +68,41 @@ Page({
     })
   },
 
+//  客服
+  onKf: function(e){
+    console.log(e)
+  },
+
+  //购买
+  onShop: function(){
+    wx.chooseAddress({
+      success: function (res) {
+        console.log(res.userName)
+        console.log(res.postalCode)
+        console.log(res.provinceName)
+        console.log(res.cityName)
+        console.log(res.countyName)
+        console.log(res.detailInfo)
+        console.log(res.nationalCode)
+        console.log(res.telNumber)
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-  },
+    this.setData({
+      ints: config.sets.int
+    })
+  },  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**

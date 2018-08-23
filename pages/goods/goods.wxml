@@ -26,7 +26,7 @@
   </view>
 
   <!-- 积分 -->
-  <view class='integral' wx:if="{{int}}" >
+  <view class='integral' wx:if="{{ints && int}}" >
     <view>
       <image class='bhIco iocs ' bindtap='offInt' src='../../img/ico/bh1.png' ></image>
       <view class='intT1'>
@@ -59,21 +59,34 @@
   <view class='goodsbar'>
     <view class='goodsleft brLeft'>
       <!-- 地图 -->
-      <image class='iocs iocsLeft' bindtap='onMap' src='../../img/ico/map.png'></image>
+      <view class='goodsleft' bindtap='onMap' >
+         <image class='iocs' src='../../img/ico/map.png'></image>
+         <view class='goodst2'> 店 </view>
+      </view>
       <!-- 客服 -->
-      <image class='iocs iocsLeft' src='../../img/ico/kf1.png'></image>
+      <view class='goodsleft'>
+        <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
+        <!-- <button size='0' bindcontact="onKf" >
+          <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
+        </button> -->
+         <!-- <view class='goodst2'> 客服 </view> -->
+      </view>
       <!-- 收藏 -->
-      <image class='iocs iocsLeft' src='../../img/ico/sc.png'></image>
-      <!-- 积分 -->
       <view class='goodsleft' bindtap='onInt' >
-        <image class='iocs' src='../../img/ico/goods.png'></image>
+         <image class='iocs iocsLeft' src='../../img/ico/sc.png'></image>
+         <!-- <view class='goodst2'> 收藏 </view> -->
+      </view>
+      
+      <!-- 积分 -->
+      <view class='goodsleft' bindtap='onInt' wx:if="{{ints}}" >
+        <image class='iocs iocsLeft' src='../../img/ico/goods.png'></image>
         <view class='goodst2'> 104 </view>
       </view>
     </view>
 
     <!-- 购买 -->
     <view class=' brRinght'>
-      <view class='goodsRing'>
+      <view class='goodsRing' bindtap='onShop'>
           立即购买
       </view>
     </view>

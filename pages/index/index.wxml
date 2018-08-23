@@ -61,7 +61,7 @@
 
   <!-- 索引 -->
   <view class='miaoD' bindtap='onmy'>
-      -
+      My
   </view>
 
 </view>

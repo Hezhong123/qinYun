@@ -169,5 +169,8 @@ page{
   position: fixed;
     right: 20vw;
     bottom: 0px;
+  font-size: 0.9rem;
+  line-height: 30px;  
+  padding: 2px 5px 0;  
     
 }
