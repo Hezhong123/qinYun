@@ -1,1 +1,159 @@
 /* pages/goods/goods.wxss */
+
+.goodsleft{
+  display: flex
+}
+
+.iocs{
+  width: 27px;
+  height: 27px;
+}
+.iocsLeft{
+  margin-right: 10px;
+}
+
+.goodst2{
+  line-height: 28px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #bbbbbb; 
+}
+
+/* 地图 */
+map{
+  border-radius: 10px; 
+}
+.mapTop{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.mapT1{
+  font-size: 0.9rem;
+  margin-left: 15px;
+  letter-spacing: 2px;  
+}
+
+.mpIco{
+  margin-top: -6px;
+}
+
+/* 积分 */
+.integral{
+  border-bottom: 1px solid #eee;
+  width: 94vw;
+  margin-left: 3vw;
+  padding: 10px 0; 
+}
+
+.bhIco{
+  position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.intT1{
+  text-align: center;
+  font-size: 0.95rem;
+  color: #000;
+  letter-spacing: 5px;
+  font-weight: 800;
+  margin:  10px 0 15px;
+}
+
+.intRom{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.txBody{
+  display: flex;
+  margin-right: -10px;
+  /* margin-right: -10px; */
+  /* flex-direction: column; */
+  /* justify-content: flex-end; */
+  /* align-items: center; */
+}
+
+.intBoy{
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bnt1{
+  background-color: #01eb7c;
+  color: #fff;
+  padding: 3px 15px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+}
+
+.bnt2{
+  border: 1px solid #bbbbbb;
+  background-color: #fff;
+  color: #bbbbbb;
+  padding: 3px 15px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+}
+
+.intTx{
+  width: 30px;
+  height: 30px;
+  background-color: #01eb7c;
+  border-radius: 30px; 
+  border: 1px solid #fff;
+  margin-bottom: 5px;
+}
+
+.txNum{
+  line-height: 30px;
+  color: #bfbfbf;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+}
+
+.intTit{
+  font-size: 0.7rem;
+  color: #bbbbbb;
+}
+
+/* 商品页脚 */
+.goodsBody{
+  width: 100vw;
+  box-shadow: 1px -1px 2px #eee;
+  position: fixed;
+    bottom: 0;
+}
+
+.goodsbar{
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around ;
+}
+
+.goodsRing{
+  margin-right: 20px;
+  background-color: #01eb7c;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 35px;
+  font-size: 0.9rem;
+  border-radius: 20px; 
+}
+
+.brLeft{
+  flex: 2;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.brRinght{
+  flex: 1;
+}

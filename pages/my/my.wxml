@@ -7,6 +7,9 @@
       <view class=" {{ontabs == 1 ? 'myitme1 onitme2': 'myitme1'}} " bindtap='ontab' data-obj='1'>
         喜欢的活动
       </view>
+      <view class=" {{ontabs == 2 ? 'myitme1 onitme3': 'myitme1'}} " bindtap='ontab' data-obj='2'>
+        喜欢的活动
+      </view>
   </view>
   我的页面
 </view>

@@ -1,2 +1,90 @@
 <!--pages/goods/goods.wxml-->
-<text>pages/goods/goods.wxml</text>
+<view>
+
+
+<!-- 商品页脚 -->
+<view class='goodsBody'>
+
+  <!-- 地图 -->
+  <view class='integral' wx:if="{{maps}}" >
+    <view class='mapTop'>
+      <text class='mapT1'>店铺名称</text>
+      <image class='mpIco iocs ' bindtap='offMap' src='../../img/ico/gw.png' ></image>
+    </view>
+    
+    <map id="map" 
+    longitude="{{longitude}}" 
+    latitude="{{latitude}}" 
+    scale="17" 
+    controls="{{controls}}" 
+    bindcontroltap="controltap" 
+    markers="{{markers}}" bindmarkertap="markertap"
+     polyline="{{polyline}}" 
+     bindregionchange="regionchange" 
+     show-location style="width: 100%; height: 260px;">
+     </map>
+  </view>
+
+  <!-- 积分 -->
+  <view class='integral' wx:if="{{int}}" >
+    <view>
+      <image class='bhIco iocs ' bindtap='offInt' src='../../img/ico/gw.png' ></image>
+      <view class='intT1'>
+        标题
+      </view>
+      <view class='intRom' >
+        <view class='txBody' wx:for="{{[1,1,11,1,1,1,1,1,1,11,1,1,1,1,1,1,11,1,1,1,1,1,1,11,1,1,1,1]}}"> 
+          <image class='intTx'></image>
+          <!-- <text class='intTit'>1212</text> -->
+        </view>
+       
+      </view>
+     <view class='txNum' > 已有35位好朋友为我点赞</view>
+
+      <view class='intBoy'>
+        <view class='bnt1'>
+          支持一下
+        </view>
+        
+        <view  class='bnt2'>
+          我也发起
+        </view>
+
+      </view>
+
+    </view>
+  </view>
+  
+  <!-- 页脚 -->
+  <view class='goodsbar'>
+    <view class='goodsleft brLeft'>
+      <!-- 地图 -->
+      <image class='iocs iocsLeft' bindtap='onMap' src='../../img/ico/gw.png'></image>
+      <!-- 客服 -->
+      <image class='iocs iocsLeft' src='../../img/ico/gw.png'></image>
+      <!-- 收藏 -->
+      <image class='iocs iocsLeft' src='../../img/ico/gw.png'></image>
+      <!-- 积分 -->
+      <view class='goodsleft' bindtap='onInt' >
+        <image class='iocs' src='../../img/ico/top.png'></image>
+        <view class='goodst2'> 104 </view>
+      </view>
+    </view>
+
+    <!-- 购买 -->
+    <view class=' brRinght'>
+      <view class='goodsRing'>
+          立即购买
+      </view>
+    </view>
+
+    
+
+    <view>
+
+    </view>
+  </view>
+
+</view>
+</view>
+

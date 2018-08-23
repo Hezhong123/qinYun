@@ -21,6 +21,10 @@ page{
 
 .onitme2{
   border-bottom: 2px solid #01eb7c;
+  /* border-bottom-right-radius: 10px; */
+}
+.onitme3{
+  border-bottom: 2px solid #01eb7c;
   border-bottom-right-radius: 10px;
 }
 

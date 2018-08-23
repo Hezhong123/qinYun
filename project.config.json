@@ -30,31 +30,18 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
-					"name": "活动",
-					"pathName": "pages/marke/marke",
-					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "我的",
-					"pathName": "pages/my/my",
-					"query": ""
-				},
-				{
-					"id": 2,
-					"name": "生成图片",
-					"pathName": "pages/cnanvans/cnanvans",
+					"name": "商品",
+					"pathName": "pages/goods/goods",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "我的活动",
-					"pathName": "pages/mymk/mymk",
-					"query": ""
+					"name": "我的",
+					"pathName": "pages/my/my"
 				}
 			]
 		}
