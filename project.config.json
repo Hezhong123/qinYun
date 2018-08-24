@@ -30,18 +30,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 0,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "商品",
 					"pathName": "pages/goods/goods",
-					"query": ""
+					"query": "id=1535080022150202&userid=222"
 				},
 				{
 					"id": -1,
 					"name": "我的",
-					"pathName": "pages/my/my"
+					"pathName": "pages/my/my",
+					"query": ""
 				}
 			]
 		}

@@ -1,9 +1,23 @@
 <!--pages/goods/goods.wxml-->
+<import src="../../wxParser/index.wxml"/>
+
 <view>
 
+  <!-- 模态框 -->
+  <view class='mtk' >
+    <view class='mtbtn'>
+      <view class='mtbtns'>登录</view>
+    </view>
+     <view  class='mtbj' ></view>
+  </view>
 
-<!-- 商品页脚 -->
-<view class='goodsBody'>
+  <!-- 富文本渲染 -->
+  <view class="wxParser" wx:if='{{0}}'>
+    <template is="wxParser" data="{{wxParserData:richText.nodes}}"/>
+  </view>
+
+  <!-- 商品页脚 -->
+  <view class='goodsBody' wx:if='{{0}}' >
 
   <!-- 地图 -->
   <view class='integral' wx:if="{{maps}}" >
@@ -65,7 +79,7 @@
       </view>
       <!-- 客服 -->
       <view class='goodsleft'>
-        <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
+        <image class='iocs' bindcontact="onKf brLeft" src='../../img/ico/kf1.png'></image>
         <!-- <button size='0' bindcontact="onKf" >
           <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
         </button> -->

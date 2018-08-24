@@ -1,5 +1,9 @@
 /* pages/goods/goods.wxss */
+@import '../../wxParser/index.wxss'
 
+.wxParser{
+  padding-bottom: 60px;
+}
 .goodsleft{
   display: flex
 }
@@ -131,6 +135,8 @@ map{
 /* 商品页脚 */
 .goodsBody{
   width: 100vw;
+
+  background-color: #ffffff;
   box-shadow: 1px -1px 2px #eee;
   position: fixed;
     bottom: 0;
@@ -162,4 +168,25 @@ map{
 
 .brRinght{
   flex: 1;
+}
+
+/* 模态框 */
+.mtk{
+  background-color: #ffffff;
+
+}
+.mtbtn{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mtbtns{
+  color: #ffffff;
+  padding: 5px 30px;
+  letter-spacing: 2px;
+  border-radius: 30px; 
+  background-color: #01eb7c;
 }

@@ -1,6 +1,8 @@
 const app = getApp()
 import hez from '../../utils/hez.js'
+const wxParser = require('../../wxParser/index');
 const config = app.globalData 
+import { getGoodsCent } from '../../utils/api.js'
 // pages/goods/goods.js
 Page({
 
@@ -8,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    datas: "",
     maps:false,
     int:true,
     ints:false,
@@ -93,6 +96,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(111, options)
+    getGoodsCent(res => {
+      this.setData({
+        datas: res
+      })
+      wx.setNavigationBarTitle({
+        title: res.title
+      })
+      wxParser.parse({
+        bind: 'richText',
+        html: res.content,
+        target: this,
+        enablePreviewImage: false, // 禁用图片预览功能
+        tapLink: (url) => { // 点击超链接时的回调函数
+          // url 就是 HTML 富文本中 a 标签的 href 属性值
+          // 这里可以自定义点击事件逻辑，比如页面跳转
+          wx.navigateTo({
+            url
+          });
+        }
+      });
+    }, { richTextID: options.id })
     this.setData({
       ints: config.sets.int
     })

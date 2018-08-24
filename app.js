@@ -44,7 +44,7 @@ App({
     // query.compare('text', '=', '666')
     Product.setQuery(query).find()
       .then(res => {
-        console.log('sdsd', res.data.objects[0])
+        console.log('用户信息', res.data.objects[0])
         this.globalData.sets.int = res.data.objects[0].int
         this.globalData.sets.intList = res.data.objects[0].intList
       })

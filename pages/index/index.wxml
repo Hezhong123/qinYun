@@ -7,8 +7,8 @@
     </view> -->
     <scroll-view scroll-x class='topBar'>
      <view wx:for="{{ classtab }}" wx:key='icos' 
-      class="{{index == oni ? 'topIoc':'topIoc1'}}" bindtap='onIco' data-oni='{{index}}' >
-        分类{{index}}
+      class="{{index == oni ? 'topIoc':'topIoc1'}}" bindtap='onIco' data-oni='{{[index,classtab[index].classID ]}}' >
+        {{classtab[index].className }}
       </view>
     </scroll-view>
     <view class='topHx'></view>
@@ -19,10 +19,10 @@
   <scroll-view class='bodys' >
 
     <!-- 商品 -->
-    <view class='goods' wx:for='{[1,1,1,1,1,1]}' wx:key='id' >
-        <image class='goodsimg' bindtap='onvct' data-cs='{{index}}' mode='widthFix' src='../../img/02.jpeg'></image>
+    <view class='goods' wx:for='{{datas}}' wx:key='id' >
+        <image class='goodsimg' bindtap='onvct' data-cs='{{datas[index].id}}' mode='widthFix' src='{{datas[index].cover.path}}'></image>
         <view >
-          <view class='goodst1' bindtap='onvct' data-cs='{{index}}' >商品标题 | 商品标题商品标题商品标题商品标题</view>
+          <view class='goodst1' bindtap='onvct' data-cs='{{index}}' >{{ datas[index].description }}</view>
           <view class='goodtbas'>
             <view class='goodsleft'>
               <view class='goodsleft' style='margin-right:10px;'>
