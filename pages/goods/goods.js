@@ -10,10 +10,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    info: false,
     datas: "",
     maps:false,
     int:true,
-    ints:false,
+    ints:true,
     latitude:"",
     longitude:""
   },
@@ -92,11 +93,52 @@ Page({
     })
   },
 
+  // 用户信息
+  infos: function(e){
+    let infos = app.globalData.userInfo
+    let infod = e.detail.userInfo
+    let infoli = Object.assign(infos, infos)
+    console.log('用户信息', infoli )
+    app.globalData.userInfo = infoli
+    this.setData({
+      info: false
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(111, options)
+    // 授权登录
+    let that = this
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function (res) {
+              // console.log('用户信息授权', res.userInfo)
+              let infos = app.globalData.userInfo
+              let infod = res.userInfo
+              let infoli = Object.assign(infos, infos)
+              console.log('授权用户信息', infoli)
+              app.globalData.userInfo = infoli
+              that.setData({
+                info: false
+              })
+            }
+
+          })
+        } else {
+          that.setData({
+            info: true
+          })
+        }
+      }
+    })
+
+    console.log('页面参数', options)
+
     getGoodsCent(res => {
       this.setData({
         datas: res
@@ -118,16 +160,15 @@ Page({
         }
       });
     }, { richTextID: options.id })
-    this.setData({
-      ints: config.sets.int
-    })
+
+    
   },  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**

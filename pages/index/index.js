@@ -53,6 +53,12 @@ Page({
     })
   },
 
+  // 进入我的页面
+  onmy: function(e){
+    wx.navigateTo({
+      url: '../../pages/my/my'
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载

@@ -4,20 +4,21 @@
 <view>
 
   <!-- 模态框 -->
-  <view class='mtk' >
+  <view class='mtk' wx:if="{{info}}">
     <view class='mtbtn'>
-      <view class='mtbtns'>登录</view>
+      <!-- <view class='mtbtns'>授权登录</view> -->
+      <button class='mtbtns' open-type="getUserInfo"  bindgetuserinfo='infos'>授权登录</button>
     </view>
      <view  class='mtbj' ></view>
   </view>
 
   <!-- 富文本渲染 -->
-  <view class="wxParser" wx:if='{{0}}'>
+  <view class="wxParser" wx:if='{{!info}}'>
     <template is="wxParser" data="{{wxParserData:richText.nodes}}"/>
   </view>
 
   <!-- 商品页脚 -->
-  <view class='goodsBody' wx:if='{{0}}' >
+  <view class='goodsBody' wx:if='{{!info}}' >
 
   <!-- 地图 -->
   <view class='integral' wx:if="{{maps}}" >
@@ -78,15 +79,16 @@
          <view class='goodst2'> 店 </view>
       </view>
       <!-- 客服 -->
-      <view class='goodsleft'>
-        <image class='iocs' bindcontact="onKf brLeft" src='../../img/ico/kf1.png'></image>
-        <!-- <button size='0' bindcontact="onKf" >
+      <view class='goodsleft iocsLeft'>
+        <!-- <image class='iocs' bindcontact="onKf brLeft" open-type="contact" src='../../img/ico/kf1.png'></image> -->
+        <button size='0'  style='position: none' open-type="contact" bindcontact="onKf" >
           <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
-        </button> -->
+        </button>
          <!-- <view class='goodst2'> 客服 </view> -->
       </view>
+      
       <!-- 收藏 -->
-      <view class='goodsleft' bindtap='onInt' >
+      <view class='goodsleft'>
          <image class='iocs iocsLeft' src='../../img/ico/sc.png'></image>
          <!-- <view class='goodst2'> 收藏 </view> -->
       </view>

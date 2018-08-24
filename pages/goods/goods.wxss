@@ -27,6 +27,8 @@ button{
   display: inherit;
   position: none;
   background-color: #fff;
+  padding: 0;
+  border: 1px solid #ffffff;
 }
 
 /* 地图 */
@@ -53,13 +55,13 @@ map{
   border-bottom: 1px solid #eee;
   width: 94vw;
   margin-left: 3vw;
-  padding: 10px 0; 
+  padding: 10px 0;  
 }
 
 .bhIco{
   position: absolute;
     right: 15px;
-    top: 10px;
+    top: 10px;  
 }
 
 .intT1{
@@ -186,6 +188,8 @@ map{
 .mtbtns{
   color: #ffffff;
   padding: 5px 30px;
+  font-size: 1rem;
+  display: initial;
   letter-spacing: 2px;
   border-radius: 30px; 
   background-color: #01eb7c;
