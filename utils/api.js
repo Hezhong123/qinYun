@@ -64,7 +64,7 @@ export const postActivityAdd = (cd,obj) =>{
     title: '加载中',
   })
   wx.BaaS.invokeFunction('postActivityAdd', obj).then(res => {
-    cd(res.data.data)
+    cd(res.data)
     wx.hideLoading()
   }, err => {
     console.log(err)
@@ -77,6 +77,19 @@ export const postActivityGet = (cd ,obj)=>{
     title: '加载中',
   })
   wx.BaaS.invokeFunction('postActivityGet', obj).then(res => {
+    cd(res)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+}
+
+//用户收藏
+export const userCollect = (cd, obj) => {
+  wx.showLoading({
+    title: '加载中',
+  })
+  wx.BaaS.invokeFunction('userCollect', obj).then(res => {
     cd(res)
     wx.hideLoading()
   }, err => {

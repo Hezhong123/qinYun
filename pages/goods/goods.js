@@ -2,7 +2,7 @@ const app = getApp()
 import hez from '../../utils/hez.js'
 const wxParser = require('../../wxParser/index');
 const config = app.globalData 
-import { getGoodsCent, postActivity, postActivityAdd, postActivityGet } from '../../utils/api.js'
+import { getGoodsCent, postActivity, postActivityAdd, postActivityGet, userCollect} from '../../utils/api.js'
 // pages/goods/goods.js
 Page({
 
@@ -117,7 +117,6 @@ Page({
     }
     postActivityAdd(res=>{
       console.log('点赞', res)
-
       postActivity(res => {
         this.setData({
           intli: res.objects[0].userImg,
@@ -129,7 +128,7 @@ Page({
           duration: 2000
         })
         console.log('点赞人数:', res)
-      }, { userID: '111', goodsID: '222' })
+      }, { userID: String(app.globalData.userInfo.id) , goodsID: this.data.goodsID })
     },obj)
   },
 
@@ -144,6 +143,7 @@ Page({
     // postActivityGet(res=>{
     //   console.log('新建分享', res)
     // },obj)
+
 
     const params = {
       path: '../pages/goods/goods/?id=123456&userid=0',
@@ -163,6 +163,18 @@ Page({
     })
 
   },
+
+  // 收藏商品
+  onCollect: function(){
+    let obj = {
+      userID:String(app.globalData.userInfo.id),
+      goodsID:this.data.goodsID
+    }
+    userCollect(res=>{  
+      console.log('收藏商品', res)
+    },obj)
+  },
+
 
   /**
    * 生命周期函数--监听页面加载

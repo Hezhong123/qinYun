@@ -45,7 +45,7 @@
     <view>
       <image class='bhIco iocs ' bindtap='offInt' src='../../img/ico/bh1.png' ></image>
       <view class='intT1'>
-        标题
+        喜欢点个赞
       </view>
       <view class='intRom' >
         <view class='txBody' wx:for="{{intli}}" wx:key='id' > 
@@ -59,11 +59,10 @@
      
       <view class='intBoy'>
         <view class='bnt1' bindtap='onIntsAdd'>
-          支持一下
+          点赞
         </view>
-        
         <view  class='bnt2' bindtap='onIntGet'>
-          我也发起
+          分享
         </view>
 
       </view>
@@ -90,7 +89,7 @@
       
       <!-- 收藏 -->
       <view class='goodsleft'>
-         <image class='iocs iocsLeft' src='../../img/ico/sc.png'></image>
+         <image class='iocs iocsLeft' bindtap='onCollect' src='../../img/ico/sc.png'></image>
          <!-- <view class='goodst2'> 收藏 </view> -->
       </view>
       
