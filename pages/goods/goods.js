@@ -2,7 +2,7 @@ const app = getApp()
 import hez from '../../utils/hez.js'
 const wxParser = require('../../wxParser/index');
 const config = app.globalData 
-import { getGoodsCent } from '../../utils/api.js'
+import { getGoodsCent, postActivity, postActivityAdd, postActivityGet } from '../../utils/api.js'
 // pages/goods/goods.js
 Page({
 
@@ -15,6 +15,9 @@ Page({
     maps:false,
     int:true,
     ints:true,
+    intli:'',   //点赞用户
+    intID:'',   //点赞用户id
+    goodsID:'',  //商品id
     latitude:"",
     longitude:""
   },
@@ -105,10 +108,111 @@ Page({
     })
   },
 
+  // 分享点赞
+  onIntsAdd: function(){
+    console.log(app.globalData.userInfo.avatarUrl)
+    let obj ={
+      recordID:this.data.intID,
+      item: app.globalData.userInfo.avatarUrl
+    }
+    postActivityAdd(res=>{
+      console.log('点赞', res)
+
+      postActivity(res => {
+        this.setData({
+          intli: res.objects[0].userImg,
+          intID: res.objects[0].id
+        })
+        wx.showToast({
+          title: '谢谢🙏',
+          icon: 'success',
+          duration: 2000
+        })
+        console.log('点赞人数:', res)
+      }, { userID: '111', goodsID: '222' })
+    },obj)
+  },
+
+  // 新建分享
+  onIntGet: function(){
+    // let obj = {
+    //   userID: String(app.globalData.userInfo.id),
+    //   goodsID: String(this.data.datas.id),
+    //   userImg: app.globalData.userInfo.avatarUrl
+    // }
+    // console.log('新增分享:', obj )
+    // postActivityGet(res=>{
+    //   console.log('新建分享', res)
+    // },obj)
+
+    const params = {
+      path: '../pages/goods/goods/?id=123456&userid=0',
+      width: 250
+    }
+
+    // console.log(wx.BaaS.getWXACode)
+    wx.BaaS.getWXACode('wxacode', params).then(res => {
+      // this.setData({ imageBase64: res.image })
+      console.log('二维码', res)
+      wx.previewImage({
+        current: '', // 当前显示图片的http链接
+        urls: [res.image] // 需要预览的图片http链接列表
+      })
+    }).catch(err => {
+      console.log(err)
+    })
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    console.log('页面参数', options)
+
+    getGoodsCent(res => {
+      this.setData({
+        datas: res
+      })
+      console.log('商品信息:', res)
+      wx.setNavigationBarTitle({
+        title: res.title
+      })
+      wxParser.parse({
+        bind: 'richText',
+        html: res.content,
+        target: this,
+        enablePreviewImage: false, // 禁用图片预览功能
+        tapLink: (url) => { // 点击超链接时的回调函数
+          // url 就是 HTML 富文本中 a 标签的 href 属性值
+          // 这里可以自定义点击事件逻辑，比如页面跳转
+          wx.navigateTo({
+            url
+          });
+        }
+      });
+    }, { richTextID: options.id })
+
+    // 入口判断
+    console.log(' 入口判断: ', options)
+    if (options.userid == 0){
+      this.setData({
+        int: false,
+        goodsID: options.id
+      })
+    }else{
+      console.log('基础参数', String(app.globalData.userInfo.id), String(options.id))
+      postActivity(res=>{
+        this.setData({
+          intli: res.objects[0].userImg,
+          intID: res.objects[0].id,
+          goodsID: options.id
+        })
+        console.log('点赞人数:' , res ) 
+      }, { userID: String(app.globalData.userInfo.id), goodsID: options.id })
+    }
+
     // 授权登录
     let that = this
     wx.getSetting({
@@ -136,32 +240,6 @@ Page({
         }
       }
     })
-
-    console.log('页面参数', options)
-
-    getGoodsCent(res => {
-      this.setData({
-        datas: res
-      })
-      wx.setNavigationBarTitle({
-        title: res.title
-      })
-      wxParser.parse({
-        bind: 'richText',
-        html: res.content,
-        target: this,
-        enablePreviewImage: false, // 禁用图片预览功能
-        tapLink: (url) => { // 点击超链接时的回调函数
-          // url 就是 HTML 富文本中 a 标签的 href 属性值
-          // 这里可以自定义点击事件逻辑，比如页面跳转
-          wx.navigateTo({
-            url
-          });
-        }
-      });
-    }, { richTextID: options.id })
-
-    
   },  
 
   /**

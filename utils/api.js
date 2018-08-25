@@ -44,3 +44,42 @@ export const getGoodsCent = (cd, obj) =>{
     console.log(err)
   })
 }
+
+// 获取以点赞用户
+export const postActivity = (cd ,obj) => {
+  wx.showLoading({
+    title: '加载中',
+  })
+  wx.BaaS.invokeFunction('postActivity', obj).then(res => {
+    cd(res.data.data)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+}
+
+//点赞助力
+export const postActivityAdd = (cd,obj) =>{
+  wx.showLoading({
+    title: '加载中',
+  })
+  wx.BaaS.invokeFunction('postActivityAdd', obj).then(res => {
+    cd(res.data.data)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+}
+
+// 新建点赞分享
+export const postActivityGet = (cd ,obj)=>{
+  wx.showLoading({
+    title: '加载中',
+  })
+  wx.BaaS.invokeFunction('postActivityGet', obj).then(res => {
+    cd(res)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+}

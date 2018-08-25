@@ -3,7 +3,7 @@ const app = getApp()
 import hez from '../../utils/hez.js'
 const table = app.globalData.table 
 
-import { goodsCLass, getHome} from '../../utils/api.js'
+import { goodsCLass, getHome, postActivity} from '../../utils/api.js'
 
 Page({
 
@@ -49,7 +49,7 @@ Page({
     let ins =e.currentTarget.dataset.cs
     console.log(ins)
     wx.navigateTo({
-      url: '../../pages/goods/goods?id=' + ins+'&userid='+222
+      url: '../../pages/goods/goods?id=' + ins+'&userid='+0
     })
   },
 
@@ -64,11 +64,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     wx.setNavigationBarTitle({
       title: '青语 · MK'
     })
-
     // 商品分类
     goodsCLass((res)=>{
       console.log('商品分类：', res.objects)
@@ -77,9 +75,7 @@ Page({
         classID: res.objects[1].classID,
         offset:0
       })
-
       // console.log( '分类ID', this.data.classID)
-      
       // 商品信息
       getHome((res) => {
         console.log('商品', res)

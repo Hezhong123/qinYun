@@ -48,20 +48,21 @@
         标题
       </view>
       <view class='intRom' >
-        <view class='txBody' wx:for="{{[1,1,11,1,1,1,1,1,1,11,1,1,1,1,1,1,11,1,1,1,1,1,1,11,1,1,1,1]}}"> 
-          <image class='intTx'></image>
+        <view class='txBody' wx:for="{{intli}}" wx:key='id' > 
+          <image class='intTx' src='{{intli[index]}}'></image>
           <!-- <text class='intTit'>1212</text> -->
         </view>
        
       </view>
-     <view class='txNum' > 已有35位好朋友为我点赞</view>
 
+     <view class='txNum' > 已有 {{intli.length}} 位好朋友为我点赞</view>
+     
       <view class='intBoy'>
-        <view class='bnt1'>
+        <view class='bnt1' bindtap='onIntsAdd'>
           支持一下
         </view>
         
-        <view  class='bnt2'>
+        <view  class='bnt2' bindtap='onIntGet'>
           我也发起
         </view>
 
