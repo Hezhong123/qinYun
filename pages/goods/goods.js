@@ -144,7 +144,6 @@ Page({
     //   console.log('新建分享', res)
     // },obj)
 
-
     const params = {
       path: '../pages/goods/goods/?id=123456&userid=0',
       width: 250
@@ -172,17 +171,21 @@ Page({
     }
     userCollect(res=>{  
       console.log('收藏商品', res)
+      if(res.code == 0){
+        wx.showToast({
+          title: '成功👌',
+          icon: 'success',
+          duration: 2000
+        })
+      }
     },obj)
   },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     console.log('页面参数', options)
-
     getGoodsCent(res => {
       this.setData({
         datas: res
@@ -243,7 +246,6 @@ Page({
                 info: false
               })
             }
-
           })
         } else {
           that.setData({

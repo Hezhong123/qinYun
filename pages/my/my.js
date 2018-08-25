@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ontabs: 0,
+    ontabs: 1,
     intList:false
   },
 
