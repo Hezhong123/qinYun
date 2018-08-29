@@ -145,21 +145,25 @@ Page({
     // },obj)
 
     const params = {
-      path: '../pages/goods/goods/?id=123456&userid=0',
+      scene: 'Asdsdsdsds/dsdsdsds',
+      page: 'pages/goods/goods',
       width: 250
     }
 
-    // console.log(wx.BaaS.getWXACode)
-    wx.BaaS.getWXACode('wxacode', params).then(res => {
-      // this.setData({ imageBase64: res.image })
-      console.log('二维码', res)
+    wx.BaaS.getWXACode('wxacodeunlimit', params).then(res => {
+      this.setData({ imageBase64: res.image })
+      // console.log('生成二维码', res.image)
       wx.previewImage({
         current: '', // 当前显示图片的http链接
         urls: [res.image] // 需要预览的图片http链接列表
       })
+
+
     }).catch(err => {
       console.log(err)
     })
+
+    
 
   },
 
@@ -294,7 +298,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+   ReachBottom: function (){
   
   },
 

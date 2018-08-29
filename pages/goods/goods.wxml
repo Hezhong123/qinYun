@@ -72,30 +72,30 @@
   
   <!-- 页脚 -->
   <view class='goodsbar'>
-    <view class='goodsleft brLeft'>
+    <view class='goodsleftBody brLeft'>
       <!-- 地图 -->
       <view class='goodsleft' bindtap='onMap' >
          <image class='iocs' src='../../img/ico/map.png'></image>
-         <view class='goodst2'> 店 </view>
+         <view class='goodst2'> 门店 </view>
       </view>
       <!-- 客服 -->
-      <view class='goodsleft iocsLeft'>
-        <!-- <image class='iocs' bindcontact="onKf brLeft" open-type="contact" src='../../img/ico/kf1.png'></image> -->
+      <!-- <view class='goodsleft iocsLeft'>
+        <image class='iocs' bindcontact="onKf brLeft" open-type="contact" src='../../img/ico/kf1.png'></image>
+        <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
         <button size='0'  style='position: none' open-type="contact" bindcontact="onKf" >
-          <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
+          <view class='goodst2'> 客服 </view>
         </button>
-         <!-- <view class='goodst2'> 客服 </view> -->
-      </view>
+      </view> -->
       
       <!-- 收藏 -->
-      <view class='goodsleft'>
-         <image class='iocs iocsLeft' bindtap='onCollect' src='../../img/ico/sc.png'></image>
-         <!-- <view class='goodst2'> 收藏 </view> -->
+      <view class='goodsleft iocsLeft '>
+         <image class='iocs' bindtap='onCollect' src='../../img/ico/sc.png'></image>
+         <view class='goodst2'> 收藏 </view>
       </view>
       
       <!-- 积分 -->
-      <view class='goodsleft' bindtap='onInt' wx:if="{{ints}}" >
-        <image class='iocs iocsLeft' src='../../img/ico/goods.png'></image>
+      <view class='goodsleft iocsLeft' bindtap='onInt' wx:if="{{ints}}" >
+        <image class='iocs' src='../../img/ico/goods.png'></image>
         <view class='goodst2'> 104 </view>
       </view>
     </view>

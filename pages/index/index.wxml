@@ -60,8 +60,8 @@
   </scroll-view>
 
   <!-- 索引 -->
-  <view class='miaoD' bindtap='onmy'>
+  <!-- <view class='miaoD' bindtap='onmy'>
       My
-  </view>
+  </view> -->
 
 </view>

@@ -4,8 +4,18 @@
 .wxParser{
   padding-bottom: 60px;
 }
+
+.goodsleftBody{
+  display: flex;
+  /* justify-content: space-around; */
+  /* flex-direction: column; */
+}
+
 .goodsleft{
-  display: flex
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 
 .iocs{
@@ -13,14 +23,15 @@
   height: 27px;
 }
 .iocsLeft{
-  margin-left: 10px;
+  margin-left: 25px;
 }
 
 .goodst2{
-  line-height: 28px;
-  font-size: 0.8rem;
+  /* line-height: 1px; */
+  font-size: 0.6rem;
   letter-spacing: 2px;
   color: #bbbbbb; 
+  text-align: center;
 }
 
 button{
@@ -162,14 +173,14 @@ map{
 }
 
 .brLeft{
-  flex: 2;
+  flex: 3;
   display: flex;
   align-items: center;
   margin-left: 15px;
 }
 
 .brRinght{
-  flex: 1;
+  flex: 2;
 }
 
 /* 模态框 */
