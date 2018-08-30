@@ -55,6 +55,7 @@ export const postActivity = (cd ,obj) => {
     wx.hideLoading()
   }, err => {
     console.log(err)
+    cd(err)
   })
 }
 
@@ -68,6 +69,7 @@ export const postActivityAdd = (cd,obj) =>{
     wx.hideLoading()
   }, err => {
     console.log(err)
+    cd(err)
   })
 }
 

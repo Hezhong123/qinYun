@@ -16,8 +16,8 @@ Page({
     int:true,
     ints:true,
     intli:'',   //点赞用户
-    intID:'',   //点赞用户id
-    goodsID:'',  //商品id
+    userid:'',   //点赞用户id
+    goodsId:'',  //商品id
     latitude:"",
     longitude:""
   },
@@ -110,26 +110,62 @@ Page({
 
   // 分享点赞
   onIntsAdd: function(){
-    console.log(app.globalData.userInfo.avatarUrl)
+    // console.log(app.globalData.userInfo)
     let obj ={
-      recordID:this.data.intID,
-      item: app.globalData.userInfo.avatarUrl
+      userId: this.data.userid , // 用户id
+      goodsId:this.data.goodsid,
+      userImg: app.globalData.userInfo.avatarUrl
     }
-    postActivityAdd(res=>{
-      console.log('点赞', res)
-      postActivity(res => {
-        this.setData({
-          intli: res.objects[0].userImg,
-          intID: res.objects[0].id
-        })
+    postActivityGet(res=>{
+      console.log('点赞', res.data)
+      if (typeof (res.data) === 'string' ){
+        console.log(res.data)
+        let obj = {
+          recordID: res.data,
+          item: app.globalData.userInfo.avatarUrl
+        }
+        postActivityAdd((res)=>{
+          console.log('sss', res.data.userImg)
+          this.setData({
+            intli: res.data.userImg
+          })
+        },obj)
+
+      }else{
         wx.showToast({
           title: '谢谢🙏',
           icon: 'success',
           duration: 2000
         })
-        console.log('点赞人数:', res)
-      }, { userID: String(app.globalData.userInfo.id) , goodsID: this.data.goodsID })
+
+        console.log(22)
+      }
+
+      // if (res.data = ty ){
+      //   wx.showToast({
+      //     title: '谢谢🙏',
+      //     icon: 'success',
+      //     duration: 2000
+      //   })
+      //   postActivity(res => {
+      //     this.setData({
+      //       intli: res.objects[0].userImg,
+      //       intID: res.objects[0].id
+      //     })
+      //     console.log('点赞人数:', res)
+      //   }, { userId: this.data.userid, goodsId: this.data.goodsid })
+      // }else{
+      //   wx.showToast({
+      //     title: '谢谢🙏',
+      //     icon: 'success',
+      //     duration: 2000
+      //   })
+      // }
+      
     },obj)
+
+    // console.log('点赞信息:', obj )
+
   },
 
   // 新建分享
@@ -157,8 +193,6 @@ Page({
         current: '', // 当前显示图片的http链接
         urls: [res.image] // 需要预览的图片http链接列表
       })
-
-
     }).catch(err => {
       console.log(err)
     })
@@ -194,10 +228,12 @@ Page({
       this.setData({
         datas: res
       })
+
       console.log('商品信息:', res)
       wx.setNavigationBarTitle({
         title: res.title
       })
+
       wxParser.parse({
         bind: 'richText',
         html: res.content,
@@ -214,22 +250,26 @@ Page({
     }, { richTextID: options.id })
 
     // 入口判断
-    console.log(' 入口判断: ', options)
-    if (options.userid == 0){
+    console.log(' 入口判断: ', options)     //0 商品详情页进来，  1 扫码来
+    if (options.userid == '0' ){
+      // 显示点赞过商品的人
       this.setData({
         int: false,
-        goodsID: options.id
+        userid: app.globalData.userInfo.id,
+        goodsid: options.id
       })
+      console.log('详情页')
     }else{
-      console.log('基础参数', String(app.globalData.userInfo.id), String(options.id))
+      // 查询点过赞的用户
+      console.log('扫码', String(app.globalData.userInfo.id), String(options.id))
       postActivity(res=>{
+        console.log('点过赞', res)
         this.setData({
-          intli: res.objects[0].userImg,
-          intID: res.objects[0].id,
-          goodsID: options.id
+          userid: options.userid,
+          goodsid: options.id,
+          intli: res.objects[0].userImg
         })
-        console.log('点赞人数:' , res ) 
-      }, { userID: String(app.globalData.userInfo.id), goodsID: options.id })
+      }, { userId: String(options.userid), goodsId: options.id })
     }
 
     // 授权登录

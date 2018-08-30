@@ -40,8 +40,6 @@ Page({
       }, { offset: 0, classID: parseInt(classID) })
     }
     console.log(ins, classID)
-    
-
   },
   
   // 进入详情
@@ -85,11 +83,6 @@ Page({
       }, { offset: 0 , classID: parseInt(this.data.classID)})
 
     },'')
-
-    
-    
-
-    
   },
 
   /**
