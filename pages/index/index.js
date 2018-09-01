@@ -65,6 +65,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '青语 · MK'
     })
+    console.log(app)
     // 商品分类
     goodsCLass((res)=>{
       console.log('商品分类：', res.objects)
@@ -81,7 +82,6 @@ Page({
           datas: res.objects
         })
       }, { offset: 0 , classID: parseInt(this.data.classID)})
-
     },'')
   },
 

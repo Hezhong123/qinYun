@@ -36,7 +36,6 @@
 	* className 分类名称
 	* classId 分类id
 	 
-	 	
 
 * 记录树 datas
 	* 用户行为记录
@@ -54,21 +53,25 @@
 
 
 
-	
+* 设置 config （分类是否显示食品类）
+	* 测试模式
+	* 开发者模式	
 	
 
- 
 
 
 
 
 *** 
 
-### 函数
-##### 获取商品信息
+### 云函数
+
+##### config 测试状态函数
+	
+	
 	exports.main = function functionName(event, callback) {
 	  let query = new BaaS.Query()
-	  let Product = new BaaS.TableObject(49223)
+	  let Product = new BaaS.TableObject(49225)
 	  Product.find().then(res => {
 	    callback(null, res.data)
 	  }, err => {
@@ -76,13 +79,34 @@
 	  })
 	}
 	
-	// 商品分类
-	export const goodsCLass = (cd,obj) => {
-	  wx.showLoading({
-	    title: '加载中',
-	  })
-	  wx.BaaS.invokeFunction('getClass', obj).then(res => {
-	    cd(res.data)
-	    wx.hideLoading()
+	
+	
+
+##### getClass 获取首页分类信息   【分类表单id／测试／线上】
+	// {
+	//   tableID: 49223
+	// }
+	
+	exports.main = function functionName(event, callback) {
+	  let query = new BaaS.Query()
+	  let Product = new BaaS.TableObject(event.data.tableID)
+	  Product.find().then(res => {
+	    callback(null, res.data)
+	  }, err => {
+	    callback(null, err)
 	  })
 	}
+	
+##### getHome 获取首页商品信息 【内容库id ／ 10列一页】
+	exports.main = function functionName(event, callback) {
+	  let MyContentGroup = new BaaS.ContentGroup(1535077985530912)
+	  let query = new BaaS.Query()
+	  query.arrayContains('categories', [event.data.classID])
+	
+	  MyContentGroup.setQuery(query).limit(10).offset( event.data.offset).orderBy(['-created_at']).find().then( res => {
+	     callback(null, res.data)
+	  })
+	   
+	}
+
+

@@ -26,15 +26,13 @@ App({
       this.globalData.userInfo = res
       console.log('用户信息', res)
     })
+  
+    
   },
   globalData: {
     userInfo: '',
     table:{
       activity: 49223
-    },
-    sets:{
-      int:false,
-      intList:false
     }
   }
 })
