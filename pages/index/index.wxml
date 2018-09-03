@@ -26,17 +26,17 @@
           <view class='goodtbas'>
             <view class='goodsleft'>
               <view class='goodsleft' style='margin-right:10px;'>
-                <image class='iocs' src='../../img/ico/sc.png'></image>
+                <image class='iocs' src='../../img/ico/show.png'></image>
                 <view class='goodst2'>123</view>
               </view>
               
               <view class='goodsleft'>
-                <image class='iocs' src='../../img/ico/gw.png'></image>
+                <image class='iocs' src='../../img/ico/sc.png'></image>
                 <view class='goodst2'>30</view>
               </view>
             </view>
             <view class='goodsleft'>
-                <image class='iocs' src='../../img/ico/top.png'></image>
+                <image class='iocs' src='../../img/ico/share.png'></image>
                 <view class='goodst2'> GET </view>
               </view>
           </view>

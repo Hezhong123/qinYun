@@ -205,3 +205,46 @@ map{
   border-radius: 30px; 
   background-color: #01eb7c;
 }
+
+/* 推荐 */
+.ints{
+  padding-bottom: 60px;
+}
+
+.intText{
+  text-align: center;
+  font-size: 1rem;
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.rows{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 4vw;
+}
+
+.intItme{
+  width: 48vw;
+  /* height: 50vw; */
+  /* background-color: #01eb7c;  */
+  /* margin: 2vw;  */
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.intImg{
+  width: 43vw;
+  height: 45vw;
+  background-color: #bfbfbf;
+  border-radius: 5px; 
+}
+
+.intTs{
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+}

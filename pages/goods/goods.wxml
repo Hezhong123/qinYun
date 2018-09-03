@@ -95,15 +95,15 @@
       
       <!-- 积分 -->
       <view class='goodsleft iocsLeft' bindtap='onInt' wx:if="{{ints}}" >
-        <image class='iocs' src='../../img/ico/goods.png'></image>
-        <view class='goodst2'> 104 </view>
+        <image class='iocs' src='../../img/ico/share.png'></image>
+        <view class='goodst2'>分享</view>
       </view>
     </view>
 
     <!-- 购买 -->
     <view class=' brRinght'>
       <view class='goodsRing' bindtap='onShop'>
-          立即购买
+          {{dataText}}
       </view>
     </view>
 
@@ -115,5 +115,18 @@
   </view>
 
 </view>
+
+<!-- 推荐商品 -->
+<!-- <view class='ints' >  
+  <view class='intText'> 推荐商品 </view>
+  <view class='rows'> 
+    <view class='intItme' wx:for = "{{[1,1,1,1,1,1,1,1,1,1]}}" wx:key = "1">
+      <image class='intImg' ></image>
+      <text class='intTs'> 商品信息111商品信息1111 </text>
+    </view>
+  
+  </view>
+</view> -->
+
 </view>
 

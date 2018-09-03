@@ -12,6 +12,7 @@ Page({
   data: {
     info: false,
     datas: "",
+    dataText: '8折购买',
     maps:false,
     int:true,
     ints:true,
@@ -141,27 +142,6 @@ Page({
         console.log(22)
       }
 
-      // if (res.data = ty ){
-      //   wx.showToast({
-      //     title: '谢谢🙏',
-      //     icon: 'success',
-      //     duration: 2000
-      //   })
-      //   postActivity(res => {
-      //     this.setData({
-      //       intli: res.objects[0].userImg,
-      //       intID: res.objects[0].id
-      //     })
-      //     console.log('点赞人数:', res)
-      //   }, { userId: this.data.userid, goodsId: this.data.goodsid })
-      // }else{
-      //   wx.showToast({
-      //     title: '谢谢🙏',
-      //     icon: 'success',
-      //     duration: 2000
-      //   })
-      // }
-      
     },obj)
 
     // console.log('点赞信息:', obj )
@@ -170,23 +150,16 @@ Page({
 
   // 新建分享
   onIntGet: function(){
-    // let obj = {
-    //   userID: String(app.globalData.userInfo.id),
-    //   goodsID: String(this.data.datas.id),
-    //   userImg: app.globalData.userInfo.avatarUrl
-    // }
-    // console.log('新增分享:', obj )
-    // postActivityGet(res=>{
-    //   console.log('新建分享', res)
-    // },obj)
+    
+    console.log('分享商品参数', this.data.userid, this.data.goodsid)
 
+    //id 商品id   userid 用户id
     const params = {
-      scene: 'Asdsdsdsds/dsdsdsds',
-      page: 'pages/goods/goods',
+      path: 'pages/goods/goods?id=' + this.data.goodsid + '&userid=' + this.data.userid,
       width: 250
     }
 
-    wx.BaaS.getWXACode('wxacodeunlimit', params).then(res => {
+    wx.BaaS.getWXACode('wxacode', params).then(res => {
       this.setData({ imageBase64: res.image })
       // console.log('生成二维码', res.image)
       wx.previewImage({
@@ -197,16 +170,15 @@ Page({
       console.log(err)
     })
 
-    
-
   },
 
   // 收藏商品
   onCollect: function(){
     let obj = {
       userID:String(app.globalData.userInfo.id),
-      goodsID:this.data.goodsID
+      goodsId: String(this.data.goodsid),
     }
+    console.log('收藏商品', obj )
     userCollect(res=>{  
       console.log('收藏商品', res)
       if(res.code == 0){
