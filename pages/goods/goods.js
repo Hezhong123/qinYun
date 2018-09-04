@@ -81,20 +81,42 @@ Page({
     console.log(e)
   },
 
-  //购买
+  //新建分享海报
   onShop: function(){
-    wx.chooseAddress({
+    console.log(111)
+    wx.downloadFile({
+      url: app.globalData.userInfo.avatarUrl, //仅为示例，并非真实的资源
       success: function (res) {
-        console.log(res.userName)
-        console.log(res.postalCode)
-        console.log(res.provinceName)
-        console.log(res.cityName)
-        console.log(res.countyName)
-        console.log(res.detailInfo)
-        console.log(res.nationalCode)
-        console.log(res.telNumber)
+        console.log(res.tempFilePath)
+        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+        wx.uploadFile({
+          url: 'http://localhost:3000/cimg', //仅为示例，非真实的接口地址
+          filePath: res.tempFilePath,
+          name: 'file',
+          formData: {
+            'user': 'test'
+          },
+          success: function (res) {
+            console.log(res)
+            //do something
+          }
+        })
       }
     })
+
+
+    // wx.chooseAddress({
+    //   success: function (res) {
+    //     console.log(res.userName)
+    //     console.log(res.postalCode)
+    //     console.log(res.provinceName)
+    //     console.log(res.cityName)
+    //     console.log(res.countyName)
+    //     console.log(res.detailInfo)
+    //     console.log(res.nationalCode)
+    //     console.log(res.telNumber)
+    //   }
+    // })
   },
 
   // 用户信息
