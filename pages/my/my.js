@@ -43,13 +43,13 @@ Page({
     }
 
     rmUserCollect( res => {
-      // console.log('移除商品', res)
+      console.log('移除商品', res)
       postUserCollect(res => {
         console.log('喜欢商品', res.data.data.objects)
         this.setData({
           goodsLive: res.data.data.objects
         })
-      }, { userId: String(app.globalData.userInfo.id) })
+      }, { offset: this.data.offset, userId: String(app.globalData.userInfo.id) })
     }, obj)
   },
 
