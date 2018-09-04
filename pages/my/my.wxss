@@ -91,3 +91,8 @@ page{
   font-size: 0.8rem;
   border-radius: 10px; 
 }
+
+.icos{
+  width: 25px;
+  height: 25px;
+}

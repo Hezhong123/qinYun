@@ -12,7 +12,7 @@ Page({
   data: {
     info: false,
     datas: "",
-    dataText: '8折购买',
+    dataText: '商品海报',
     maps:false,
     int:true,
     ints:true,
@@ -117,6 +117,7 @@ Page({
       goodsId:this.data.goodsid,
       userImg: app.globalData.userInfo.avatarUrl
     }
+    console.log('分享点赞', this.data )
     postActivityGet(res=>{
       console.log('点赞', res.data)
       if (typeof (res.data) === 'string' ){
@@ -138,8 +139,21 @@ Page({
           icon: 'success',
           duration: 2000
         })
-
-        console.log(22)
+        postActivity(res => {
+          console.log('点过赞', res)
+          if (res.objects.length == 0) {
+            this.setData({
+              userid: res.objects[0].userId,
+              goodsid: res.objects[0].goodsId,
+            })
+          } else {
+            this.setData({
+              userid: res.objects[0].userId,
+              goodsid: res.objects[0].goodsId,
+              intli: res.objects[0].userImg
+            })
+          }
+        }, { userId: this.data.userid, goodsId: this.data.goodsid })
       }
 
     },obj)
@@ -176,7 +190,7 @@ Page({
   onCollect: function(){
     let obj = {
       userID:String(app.globalData.userInfo.id),
-      goodsId: String(this.data.goodsid),
+      goodsID: String(this.data.goodsid),
     }
     console.log('收藏商品', obj )
     userCollect(res=>{  
@@ -236,11 +250,19 @@ Page({
       console.log('扫码', String(app.globalData.userInfo.id), String(options.id))
       postActivity(res=>{
         console.log('点过赞', res)
-        this.setData({
-          userid: options.userid,
-          goodsid: options.id,
-          intli: res.objects[0].userImg
-        })
+        if(res.objects.length == 0){
+          this.setData({
+            userid: options.userid,
+            goodsid: options.id,
+          })
+        }else{
+          this.setData({
+            userid: options.userid,
+            goodsid: options.id,
+            intli: res.objects[0].userImg
+          })
+        }
+        
       }, { userId: String(options.userid), goodsId: options.id })
     }
 

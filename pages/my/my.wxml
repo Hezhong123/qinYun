@@ -1,6 +1,6 @@
 <!--pages/my/my.wxml-->
 <view>
-  <view class='myTop'>
+  <view class='myTop' wx:if = "{{0}}">
       <view class=" {{ontabs == 0 ? 'myitme1 onitme1': 'myitme1'}} " wx:if="{{intList}}" bindtap='ontab' data-obj='0'>
         参与
       </view>
@@ -28,30 +28,30 @@
 
   <!-- 喜欢 -->
   <view class='Goods' wx:if="{{ontabs == 1}}" >
-    <view class='myGoods' wx:for="{{[1,1,1,1,1,1,1,11,1,1,1,1,1,1]}}" >
-      <image class='myImg' mode='widthFix' src='../../img/02.jpeg' ></image>
+    <view class='myGoods' wx:for="{{goodsLive}}" wx:key = 'id' >
+      <image class='myImg' bindtap='goGoods' data-id='{{goodsLive[index].id}}' mode='widthFix' src='{{goodsLive[index].cover.path}}' ></image>
         <view class='myRinght'>
-          <view class='myT1' >你好收据分析 | 测试你好收据分析测试你好收据测试你好收据分</view>
+          <view class='myT1' >{{goodsLive[index].description}}</view>
           <view class='myGodssRinght' >
-            <text class='myT2' >3333333</text>
-            <view class='myBtn1' >$:120</view>
+            <text class='myT2' > {{goodsLive[index].store }} </text>
+            <!-- <view class='myBtn1' > 移除 </view> -->
+            <image class='icos' bindtap='rmLive' data-id='{{goodsLive[index].id}}' src='../../img/ico/rm.png'></image>
           </view>
         </view>
     </view>
   </view>
 
   <!-- 完成 -->
-  <view class='Goods' wx:if="{{ontabs == 2}}" >
+  <!-- <view class='Goods' wx:if="{{ontabs == 2}}" >
     <view class='myGoods' wx:for="{{[1,1,1,1,1,1,1,11,1,1,1,1,1,1]}}" >
       <image class='myImg' mode='widthFix' src='../../img/02.jpeg' ></image>
         <view class='myRinght'>
           <view class='myT1' >你好收据分析 | 测试你好收据分析测试你好收据测试你好收据分</view>
           <view class='myGodssRinght' >
             <text class='myT2' >已完成</text>
-            <!-- <view class='myBtn1' >分享</view> -->
           </view>
         </view>
     </view>
-  </view>
+  </view> -->
 
 </view>

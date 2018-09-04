@@ -22,8 +22,8 @@
         "text": "首页"
       },
       {
-        "iconPath": "./img/ico/tab/my.png",
-        "selectedIconPath":"./img/ico/tab/my1.png",
+        "iconPath": "./img/ico/tab/goods.png",
+        "selectedIconPath":"./img/ico/tab/goods1.png",
         "pagePath": "pages/my/my",
         "text": "我的"
       }

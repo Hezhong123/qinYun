@@ -98,3 +98,32 @@ export const userCollect = (cd, obj) => {
     console.log(err)
   })
 }
+
+// 获取用户收藏
+export const postUserCollect = (cd, obj) => {
+  wx.showLoading({
+    title: '加载中',
+  })
+  
+  wx.BaaS.invokeFunction('postUserCollect', obj).then(res => {
+    cd(res)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+
+}
+
+// 移除收藏商品
+export const rmUserCollect = (cd,obj) => {
+  wx.showLoading({
+    title: '加载中',
+  })
+  wx.BaaS.invokeFunction('rmUserCollect', obj).then(res => {
+    // console.log('rss' , res)
+    cd(res)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+}

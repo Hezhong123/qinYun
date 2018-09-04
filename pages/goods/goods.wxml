@@ -94,7 +94,7 @@
       </view>
       
       <!-- 积分 -->
-      <view class='goodsleft iocsLeft' bindtap='onInt' wx:if="{{ints}}" >
+      <view class='goodsleft iocsLeft' bindtap='onInt' wx:if="{{0}}" >
         <image class='iocs' src='../../img/ico/share.png'></image>
         <view class='goodst2'>分享</view>
       </view>
@@ -117,7 +117,7 @@
 </view>
 
 <!-- 推荐商品 -->
-<!-- <view class='ints' >  
+<view class='ints' >  
   <view class='intText'> 推荐商品 </view>
   <view class='rows'> 
     <view class='intItme' wx:for = "{{[1,1,1,1,1,1,1,1,1,1]}}" wx:key = "1">
@@ -126,7 +126,7 @@
     </view>
   
   </view>
-</view> -->
+</view>
 
 </view>
 
