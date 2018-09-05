@@ -83,40 +83,50 @@ Page({
 
   //新建分享海报
   onShop: function(){
-    console.log(111)
-    wx.downloadFile({
-      url: app.globalData.userInfo.avatarUrl, //仅为示例，并非真实的资源
+    wx.showLoading({
+      title: '生成中',
+    })
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 6000)
+
+    let that = this
+    wx.request({
+      url: 'http://localhost:3000/cimg', //仅为示例，并非真实的接口地址
+      data: {
+        bj: 'https://cloud-minapp-15402.cloud.ifanrusercontent.com/1fxSwWdsXOuAnfCx.jpg',
+        infos: app.globalData.userInfo.avatarUrl,
+        name: app.globalData.userInfo.nickName,
+        text: that.data.datas.title,
+        rwm: that.data.imageBase64, 
+        goodsImg: that.data.datas.cover.path
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'POST',
       success: function (res) {
-        console.log(res.tempFilePath)
-        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
-        wx.uploadFile({
-          url: 'http://localhost:3000/cimg', //仅为示例，非真实的接口地址
-          filePath: res.tempFilePath,
-          name: 'file',
-          formData: {
-            'user': 'test'
-          },
+        wx.hideLoading()
+        console.log(res.data.cosImg.Location)
+        wx.downloadFile({
+          url: 'https://' + res.data.cosImg.Location, //仅为示例，并非真实的资源
           success: function (res) {
-            console.log(res)
-            //do something
+            wx.previewImage({
+              current: '', // 当前显示图片的http链接
+              urls: [res.tempFilePath] // 需要预览的图片http链接列表
+            })
           }
+        })
+      },
+      fail: function(err){
+        console.log('err', err)
+        wx.showToast({
+          title: '失败',
+          icon: 'none',
+          duration: 2000
         })
       }
     })
-
-
-    // wx.chooseAddress({
-    //   success: function (res) {
-    //     console.log(res.userName)
-    //     console.log(res.postalCode)
-    //     console.log(res.provinceName)
-    //     console.log(res.cityName)
-    //     console.log(res.countyName)
-    //     console.log(res.detailInfo)
-    //     console.log(res.nationalCode)
-    //     console.log(res.telNumber)
-    //   }
-    // })
   },
 
   // 用户信息
@@ -195,13 +205,14 @@ Page({
       width: 250
     }
 
-    wx.BaaS.getWXACode('wxacode', params).then(res => {
-      this.setData({ imageBase64: res.image })
+    wx.BaaS.getWXACode('wxacode', params, true ).then(res => {
+      console.log(res)
+      this.setData({ imageBase64: res.download_url })
       // console.log('生成二维码', res.image)
-      wx.previewImage({
-        current: '', // 当前显示图片的http链接
-        urls: [res.image] // 需要预览的图片http链接列表
-      })
+      // wx.previewImage({
+      //   current: '', // 当前显示图片的http链接
+      //   urls: [res.image] // 需要预览的图片http链接列表
+      // })
     }).catch(err => {
       console.log(err)
     })
@@ -320,7 +331,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    this.onIntGet()
   },
 
   /**
