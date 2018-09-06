@@ -2,7 +2,7 @@ const app = getApp()
 import hez from '../../utils/hez.js'
 const wxParser = require('../../wxParser/index');
 const config = app.globalData 
-import { getGoodsCent, postActivity, postActivityAdd, postActivityGet, userCollect} from '../../utils/api.js'
+import { getGoodsCent, postActivity, postActivityAdd, postActivityGet, userCollect, getHome } from '../../utils/api.js'
 // pages/goods/goods.js
 Page({
 
@@ -20,6 +20,7 @@ Page({
     userid:'',   //点赞用户id
     goodsId:'',  //商品id
     poster: 0 ,   //商品海报
+    tDatas: '',   //推荐商品
     latitude:"",
     longitude:"",
     markers: ''
@@ -267,13 +268,32 @@ Page({
     },obj)
   },
 
+  // 进入商品详情页
+  onGoods: function(e){
+    let ins = e.currentTarget.dataset.cs
+    // console.log(ins)
+    wx.navigateTo({
+      url: '../../pages/goods/goods?id=' + ins + '&userid=' + 0
+    })
+  },
+
+  // 使用MK
+  useMk: function(){
+    console.log('使用mk', this.data.texts)
+    app.globalData.texts = this.data.texts
+    wx.navigateTo({
+      url: '../../pages/view/view'
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log('页面参数', options)
     getGoodsCent(res => {
-
+        
+      // 地图设置
       let markers = [{
         iconPath: "../../img/ico/maps.png",
         id: 0,
@@ -282,12 +302,16 @@ Page({
         width: 30,
         height: 30
       }] //地图
+      console.log('商品信息:', res)
+
+
       this.setData({
         datas: res,
-        markers: markers
+        markers: markers,
+        texts: res.texts
       })
 
-      console.log('商品信息:', res)
+      
       wx.setNavigationBarTitle({
         title: res.title
       })
@@ -307,6 +331,14 @@ Page({
       });
     }, { richTextID: options.id })
 
+    // 获取推荐商品
+    getHome(res =>{
+        console.log('推荐商品', res )
+        this.setData({
+          tDatas: res.objects
+        })
+    }, { offset: 0, classID: parseInt(1536221748898156) })
+
     // 入口判断
     console.log(' 入口判断: ', options)     //0 商品详情页进来，  1 扫码来
     if (options.userid == '0' ){
@@ -317,7 +349,7 @@ Page({
         goodsid: options.id
       })
       console.log('详情页')
-    }else{
+    } else{
       // 查询点过赞的用户
       console.log('扫码', String(app.globalData.userInfo.id), String(options.id))
       postActivity(res=>{

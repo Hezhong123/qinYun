@@ -62,14 +62,16 @@
         <view class='bnt1' bindtap='onIntsAdd'>
           点赞
         </view>
-        <view  class='bnt2' bindtap='onIntGet'>
-          分享
+        <view  class='bnt2' bindtap='useMk'>
+          MK
         </view>
 
       </view>
 
     </view>
   </view>
+
+  
   
   <!-- 页脚 -->
   <view class='goodsbar'>
@@ -121,9 +123,9 @@
 <view class='ints' >  
   <view class='intText'> 推荐商品 </view>
   <view class='rows'> 
-    <view class='intItme' wx:for = "{{[1,1,1,1,1,1,1,1,1,1]}}" wx:key = "1">
-      <image class='intImg' ></image>
-      <text class='intTs'> 商品信息111商品信息1111 </text>
+    <view class='intItme' wx:for = "{{tDatas}}" wx:key = "1">
+      <image class='intImg' mode='center' bindtap='onGoods' data-cs='{{tDatas[index].id}}'  src='{{tDatas[index].cover.path}}' ></image>
+      <text class='intTs'> {{tDatas[index].description}} </text>
     </view>
   
   </view>

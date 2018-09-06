@@ -31,6 +31,7 @@ App({
   },
   globalData: {
     userInfo: '',
+    texts:'', //文章内容
     table:{
       activity: 49223
     }
