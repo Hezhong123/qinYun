@@ -1,1 +1,6 @@
 /* pages/view/view.wxss */
+@import '../../wxParser/index.wxss'
+
+.wxParser{
+  padding-bottom: 60px;
+}

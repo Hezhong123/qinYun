@@ -1,2 +1,8 @@
 <!--pages/view/view.wxml-->
-<web-view src="{{texts}}"></web-view>
+<import src="../../wxParser/index.wxml"/>
+  
+  <!-- 富文本渲染 -->
+  <view class="wxParser">
+    <template is="wxParser" data="{{wxParserData:richText.nodes}}"/>
+  </view>
+<!-- <web-view src="{{texts}}"></web-view> -->
