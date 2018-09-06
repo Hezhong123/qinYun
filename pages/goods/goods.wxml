@@ -23,13 +23,14 @@
   <!-- 地图 -->
   <view class='integral' wx:if="{{maps}}" >
     <view class='mapTop'>
-      <text class='mapT1'>店铺名称</text>
+      <text class='mapT1'>{{datas.store}}</text>
       <image class='mpIco iocs ' bindtap='offMap' src='../../img/ico/bh1.png' ></image>
     </view>
     
     <map id="map" 
-    longitude="{{longitude}}" 
-    latitude="{{latitude}}" 
+    longitude="{{datas.map.y}}" 
+    latitude="{{datas.map.x}}" 
+    markers="{{markers}}"
     scale="17" 
     controls="{{controls}}" 
     bindcontroltap="controltap" 
@@ -45,7 +46,7 @@
     <view>
       <image class='bhIco iocs ' bindtap='offInt' src='../../img/ico/bh1.png' ></image>
       <view class='intT1'>
-        喜欢点个赞
+        {{datas.sales}}
       </view>
       <view class='intRom' >
         <view class='txBody' wx:for="{{intli}}" wx:key='id' > 

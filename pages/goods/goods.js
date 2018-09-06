@@ -19,39 +19,42 @@ Page({
     intli:'',   //点赞用户
     userid:'',   //点赞用户id
     goodsId:'',  //商品id
+    poster: 0 ,   //商品海报
     latitude:"",
-    longitude:""
+    longitude:"",
+    markers: ''
   },
 
   // 显示位置
   onMap: function(){
-    wx.showLoading({
-      title: '地图加载中',
-    })
+    // wx.showLoading({
+    //   title: '地图加载中',
+    // })
     this.setData({
-      int: false
+      int: false,
+      maps: true,
     })
-    let that = this
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        var latitude = res.latitude
-        var longitude = res.longitude
-        var speed = res.speed
-        var accuracy = res.accuracy
-        console.log(res)
-        wx.hideLoading()
-        that.setData({
-          maps:true,
-          int: false,
-          latitude: res.latitude,
-          longitude: res.longitude
-        })
-      },
-      fail: function(res){
-        console.log(res)
-      }
-    })
+    // let that = this
+    // wx.getLocation({
+    //   type: 'wgs84',
+    //   success: function (res) {
+    //     var latitude = res.latitude
+    //     var longitude = res.longitude
+    //     var speed = res.speed
+    //     var accuracy = res.accuracy
+    //     console.log('位置', res)
+    //     wx.hideLoading()
+    //     that.setData({
+    //       maps:true,
+    //       int: false,
+    //       latitude: res.latitude,
+    //       longitude: res.longitude
+    //     })
+    //   },
+    //   fail: function(res){
+    //     console.log(res)
+    //   }
+    // })
   },
 
   // 关闭地图
@@ -83,48 +86,77 @@ Page({
 
   //新建分享海报
   onShop: function(){
-    wx.showLoading({
-      title: '生成中',
-    })
-    setTimeout(function () {
-      wx.hideLoading()
-    }, 6000)
-
-    let that = this
-    wx.request({
-      url: 'https://api.hez.fun/cimg', //仅为示例，并非真实的接口地址
-      data: {
-        bj: 'https://cloud-minapp-15402.cloud.ifanrusercontent.com/1fxSwWdsXOuAnfCx.jpg',
-        infos: app.globalData.userInfo.avatarUrl,
-        name: app.globalData.userInfo.nickName,
-        text: that.data.datas.title,
-        rwm: that.data.imageBase64, 
-        goodsImg: that.data.datas.cover.path
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      method: 'POST',
-      success: function (res) {
+    console.log('是否生成过', this.data.poster)
+    if (this.data.poster == 0 ){
+      wx.showLoading({
+        title: '生成中',
+      })
+      setTimeout(function () {
         wx.hideLoading()
-        console.log(res.data.cosImg.Location)
-        wx.downloadFile({
-          url: 'https://' + res.data.cosImg.Location, //仅为示例，并非真实的资源
-          success: function (res) {
+      }, 6000)
+      let that = this
+      wx.request({
+        url: 'https://api.hez.fun/cimg', //仅为示例，并非真实的接口地址
+        data: {
+          bj: 'https://cloud-minapp-15402.cloud.ifanrusercontent.com/1fxSwWdsXOuAnfCx.jpg',
+          infos: app.globalData.userInfo.avatarUrl,
+          name: app.globalData.userInfo.nickName,
+          text: that.data.datas.title,
+          rwm: that.data.imageBase64,
+          goodsImg: that.data.datas.cover.path
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        method: 'POST',
+        success: function (res) {
+          wx.hideLoading()
+          that.setData({
+            poster: 'https://' + res.data.cosImg.Location
+          })
+          // 下载图片
+          that.dowImg()
+          // 新建分享
+          that.onIntsAdd()
+        },
+        fail: function (err) {
+          console.log('err', err)
+          wx.showToast({
+            title: '失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    }else{
+      console.log('有海报的了', this.data.poster)
+      this.dowImg()
+    }
+  },
+
+  // 下载图片
+  dowImg: function(){
+    wx.downloadFile({
+      url: this.data.poster, //仅为示例，并非真实的资源
+      success: function (res) {
+        let dmw = res.tempFilePath
+        // 保存到本地
+        wx.saveImageToPhotosAlbum({
+          filePath: dmw ,
+          success(res) {
+            // 预览图片
             wx.previewImage({
               current: '', // 当前显示图片的http链接
-              urls: [res.tempFilePath] // 需要预览的图片http链接列表
+              urls: [dmw] // 需要预览的图片http链接列表
+            })
+            wx.showToast({
+              title: '保存到相册了',
+              icon: 'success',
+              duration: 2000
             })
           }
         })
-      },
-      fail: function(err){
-        console.log('err', err)
-        wx.showToast({
-          title: '失败',
-          icon: 'none',
-          duration: 2000
-        })
+        console.log('下载的图片',res)
       }
     })
   },
@@ -145,19 +177,16 @@ Page({
   onIntsAdd: function(){
     // console.log(app.globalData.userInfo)
     let obj ={
-      userId: this.data.userid , // 用户id
+      userId: String(this.data.userid), // 用户id
       goodsId:this.data.goodsid,
-      userImg: app.globalData.userInfo.avatarUrl
+      userImg: app.globalData.userInfo.avatarUrl,
+      poster: this.data.poster
     }
-    console.log('分享点赞', this.data )
+    console.log('分享点赞', obj )
     postActivityGet(res=>{
-      console.log('点赞', res.data)
+      console.log('查询点赞', res.data)
       if (typeof (res.data) === 'string' ){
-        console.log(res.data)
-        let obj = {
-          recordID: res.data,
-          item: app.globalData.userInfo.avatarUrl
-        }
+        console.log('111122', res.data)
         postActivityAdd((res)=>{
           console.log('sss', res.data.userImg)
           this.setData({
@@ -185,7 +214,7 @@ Page({
               intli: res.objects[0].userImg
             })
           }
-        }, { userId: this.data.userid, goodsId: this.data.goodsid })
+        }, obj )
       }
 
     },obj)
@@ -206,7 +235,7 @@ Page({
     }
 
     wx.BaaS.getWXACode('wxacode', params, true ).then(res => {
-      console.log(res)
+      console.log('生成的二维码', res)
       this.setData({ imageBase64: res.download_url })
       // console.log('生成二维码', res.image)
       // wx.previewImage({
@@ -244,8 +273,18 @@ Page({
   onLoad: function (options) {
     console.log('页面参数', options)
     getGoodsCent(res => {
+
+      let markers = [{
+        iconPath: "../../img/ico/maps.png",
+        id: 0,
+        latitude: res.map.x,
+        longitude: res.map.y,
+        width: 30,
+        height: 30
+      }] //地图
       this.setData({
-        datas: res
+        datas: res,
+        markers: markers
       })
 
       console.log('商品信息:', res)
@@ -282,17 +321,19 @@ Page({
       // 查询点过赞的用户
       console.log('扫码', String(app.globalData.userInfo.id), String(options.id))
       postActivity(res=>{
-        console.log('点过赞', res)
+        console.log('初始化', res)
         if(res.objects.length == 0){
           this.setData({
             userid: options.userid,
             goodsid: options.id,
+            poster: 0 
           })
         }else{
           this.setData({
             userid: options.userid,
             goodsid: options.id,
-            intli: res.objects[0].userImg
+            intli: res.objects[0].userImg,
+            poster: res.objects[0].poster 
           })
         }
         

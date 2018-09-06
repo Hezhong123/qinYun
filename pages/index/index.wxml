@@ -37,7 +37,7 @@
             </view>
             <view class='goodsleft'>
                 <image class='iocs' src='../../img/ico/share.png'></image>
-                <view class='goodst2'> GET </view>
+                <view class='goodst2'> 分享 </view>
               </view>
           </view>
         </view>
