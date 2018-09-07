@@ -67,7 +67,7 @@ Page({
         console.log('二维码参数', r)
         // 海报生成参数
         let obj = {
-          bj: 'https://cloud-minapp-15402.cloud.ifanrusercontent.com/1fxSwWdsXOuAnfCx.jpg',
+          bj: 'https://cloud-minapp-15402.cloud.ifanrusercontent.com/1fyD19IWYXrnynRE.jpg',
           infos: app.globalData.userInfo.avatarUrl,
           name: app.globalData.userInfo.nickName,
           text: this.data.datas.title,
