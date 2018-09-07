@@ -1,0 +1,135 @@
+<!--pages/goods/goods.wxml-->
+<import src="../../wxParser/index.wxml"/>
+
+<view>
+
+  <!-- 模态框 -->
+  <view class='mtk' wx:if="{{info}}">
+    <view class='mtbtn'>
+      <!-- <view class='mtbtns'>授权登录</view> -->
+      <button class='mtbtns' open-type="getUserInfo"  bindgetuserinfo='infos'>授权登录</button>
+    </view>
+     <view  class='mtbj' ></view>
+  </view>
+
+  <!-- 富文本渲染 -->
+  <view class="wxParser" wx:if='{{!info}}'>
+    <template is="wxParser" data="{{wxParserData:richText.nodes}}"/>
+  </view>
+
+  <!-- 商品页脚 -->
+  <view class='goodsBody' wx:if='{{!info}}' >
+
+  <!-- 地图 -->
+  <view class='integral' wx:if="{{maps}}" >
+    <view class='mapTop'>
+      <text class='mapT1'>{{datas.store}}</text>
+      <image class='mpIco iocs ' bindtap='offMap' src='../../img/ico/bh1.png' ></image>
+    </view>
+    
+    <map id="map" 
+    longitude="{{datas.map.y}}" 
+    latitude="{{datas.map.x}}" 
+    markers="{{markers}}"
+    scale="17" 
+    controls="{{controls}}" 
+    bindcontroltap="controltap" 
+    markers="{{markers}}" bindmarkertap="markertap"
+     polyline="{{polyline}}" 
+     bindregionchange="regionchange" 
+     show-location style="width: 100%; height: 260px;">
+     </map>
+  </view>
+
+  <!-- 积赞 -->
+  <view class='integral' wx:if="{{stort == 1}}" >
+    <view>
+      <image class='bhIco iocs ' bindtap='offInt' src='../../img/ico/bh1.png' ></image>
+      <view class='intT1'>
+        {{datas.sales}}
+      </view>
+      <view class='intRom' >
+        <view class='txBody' wx:for="{{intli}}" wx:key='id' > 
+          <image class='intTx' src='{{intli[index]}}'></image>
+          <!-- <text class='intTit'>1212</text> -->
+        </view>
+       
+      </view>
+
+     <view class='txNum' > 已有 {{intli.length}} 位好朋友为我点赞</view>
+     
+      <view class='intBoy'>
+        <view class='bnt1' bindtap='onIntsAdd'>
+          点赞
+        </view>
+        <view  class='bnt2' bindtap='useMk'>
+          MK
+        </view>
+
+      </view>
+
+    </view>
+  </view>
+
+  
+  
+  <!-- 页脚 -->
+  <view class='goodsbar'>
+    <view class='goodsleftBody brLeft'>
+      <!-- 地图 -->
+      <view class='goodsleft' bindtap='onMap' >
+         <image class='iocs' src='../../img/ico/map.png'></image>
+         <view class='goodst2'> 门店 </view>
+      </view>
+      <!-- 客服 -->
+      <!-- <view class='goodsleft iocsLeft'>
+        <image class='iocs' bindcontact="onKf brLeft" open-type="contact" src='../../img/ico/kf1.png'></image>
+        <image class='iocs' bindcontact="onKf" src='../../img/ico/kf1.png'></image>
+        <button size='0'  style='position: none' open-type="contact" bindcontact="onKf" >
+          <view class='goodst2'> 客服 </view>
+        </button>
+      </view> -->
+      
+      <!-- 收藏 -->
+      <view class='goodsleft iocsLeft '>
+         <image class='iocs' bindtap='onCollect' src='../../img/ico/sc.png'></image>
+         <view class='goodst2'> 收藏 </view>
+      </view>
+      
+      <!-- 积分 -->
+      <view class='goodsleft iocsLeft' bindtap='onInt' wx:if="{{0}}" >
+        <image class='iocs' src='../../img/ico/share.png'></image>
+        <view class='goodst2'>分享</view>
+      </view>
+    </view>
+
+    <!-- 购买 -->
+    <view class=' brRinght'>
+      <view class='goodsRing' bindtap='onShop'>
+          {{dataText}}
+      </view>
+    </view>
+
+    
+
+    <view>
+
+    </view>
+  </view>
+
+</view>
+
+<!-- 推荐商品 -->
+<view class='ints' >  
+  <view class='intText'> 推荐商品 </view>
+  <view class='rows'> 
+    <view class='intItme' wx:for = "{{tDatas}}" wx:key = "1">
+      <image class='intImg' mode='center' bindtap='onGoods' data-cs='{{tDatas[index].id}}'  src='{{tDatas[index].cover.path}}' ></image>
+      <text class='intTs'> {{tDatas[index].description}} </text>
+    </view>
+  
+  </view>
+</view>
+
+</view>
+

@@ -127,3 +127,46 @@ export const rmUserCollect = (cd,obj) => {
     console.log(err)
   })
 }
+
+// 生产海报
+export const addPoster = (a)  => new Promise((r,j) => {
+  wx.showLoading({
+    title: '生成中',
+  })
+  setTimeout(function () {
+    wx.hideLoading()
+  }, 6000)
+  let that = this
+  wx.request({
+    url: 'https://api.hez.fun/cimg', //仅为示例，并非真实的接口地址
+    data: a,
+    header: {
+      'content-type': 'application/json' // 默认值
+    },
+    method: 'POST',
+    success: function (res) {
+      wx.hideLoading()
+      console.log('海报', res ) 
+      r('https://' + res.data.cosImg.Location)
+    },
+    fail: function (err) {
+      console.log('err', err)
+      j(err)
+      wx.showToast({
+        title: '失败',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  })
+})
+
+// 生成二维码 
+export const rwm = (a) => new Promise((r,j)=>{
+  wx.BaaS.getWXACode('wxacode', a, true).then(res => {
+    r(res.download_url)
+  }).catch(err => {
+    console.log(err)
+    j(err)
+  })
+})

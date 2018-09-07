@@ -129,6 +129,8 @@ Page({
           })
         }
       })
+    } else if (this.data.userid != String(app.globalData.userInfo.id) ){
+      console.log('打开别人的详情', this.data.userid, String(app.globalData.userInfo.id))
     }else{
       console.log('有海报的了', this.data.poster)
       this.dowImg()
@@ -178,22 +180,29 @@ Page({
   onIntsAdd: function(){
     // console.log(app.globalData.userInfo)
     let obj ={
-      userId: String(this.data.userid), // 用户id
+      userId: String(app.globalData.userInfo.id), // 用户id
       goodsId:this.data.goodsid,
       userImg: app.globalData.userInfo.avatarUrl,
       poster: this.data.poster
     }
     console.log('分享点赞', obj )
     postActivityGet(res=>{
-      console.log('查询点赞', res.data)
+      console.log('查询点赞数据行', res.data)
+      
+      // 有数据新增
       if (typeof (res.data) === 'string' ){
-        console.log('111122', res.data)
+        let objs = {
+          item: app.globalData.userInfo.avatarUrl,
+          recordID: res.data,
+          poster: this.data.poster
+        }
+        console.log('新写入', objs)
         postActivityAdd((res)=>{
-          console.log('sss', res.data.userImg)
+          console.log('写入成功', res)
           this.setData({
             intli: res.data.userImg
           })
-        },obj)
+        },objs)
 
       }else{
         wx.showToast({
@@ -231,7 +240,7 @@ Page({
 
     //id 商品id   userid 用户id
     const params = {
-      path: 'pages/goods/goods?id=' + this.data.goodsid + '&userid=' + this.data.userid,
+      path: 'pages/goods/goods?id=' + this.data.goodsid + '&userid=' + app.globalData.userInfo.id,
       width: 250
     }
 
@@ -291,8 +300,7 @@ Page({
    */
   onLoad: function (options) {
     console.log('页面参数', options)
-    getGoodsCent(res => {
-        
+    getGoodsCent(res => { 
       // 地图设置
       let markers = [{
         iconPath: "../../img/ico/maps.png",
@@ -341,11 +349,17 @@ Page({
 
     // 入口判断
     console.log(' 入口判断: ', options)     //0 商品详情页进来，  1 扫码来
+    // 设置初始参数
+    this.setData({
+      userid: options.userid,
+      goodsid: options.id
+    })
+
     if (options.userid == '0' ){
       // 显示点赞过商品的人
       this.setData({
         int: false,
-        userid: app.globalData.userInfo.id,
+        userid: options.userid,
         goodsid: options.id
       })
       console.log('详情页')

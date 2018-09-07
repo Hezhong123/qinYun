@@ -30,7 +30,7 @@ Page({
     console.log('删除商品', e.target.dataset.id)
     let ids = e.target.dataset.id
     wx.navigateTo({
-      url: '../../pages/goods/goods?id=' + ids + '&userid=' + 0
+      url: '../../pages/goodsA/goodsA?id=' + ids + '&userid=' + 0 + '&stort=' + 0
     })
   },
 
@@ -39,11 +39,11 @@ Page({
     let ids = e.target.dataset.id
     let obj = {
       userId: String(app.globalData.userInfo.id),
-      goodsID: String(ids)
+      goodsId: String(ids)
     }
 
     rmUserCollect( res => {
-      console.log('移除商品', res)
+      console.log('移除商品', res, obj)
       postUserCollect(res => {
         console.log('喜欢商品', res.data.data.objects)
         this.setData({
@@ -81,7 +81,7 @@ Page({
    */
   onShow: function () {
     postUserCollect(res => {
-      console.log('喜欢商品', res.data.data.objects)
+      console.log('喜欢商品', res)
       this.setData({
         goodsLive: res.data.data.objects
       })

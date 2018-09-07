@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/goods/goods",
+    "pages/goodsA/goodsA",
     "pages/my/my",
     "pages/view/view",
     "pages/logs/logs"   
