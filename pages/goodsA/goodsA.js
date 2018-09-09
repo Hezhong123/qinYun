@@ -16,6 +16,7 @@ Page({
     userId: '',   //点赞用户id
     goodsId: '',  //商品id
     intli: '',   //点赞用户
+    userImg: '', //用户头像
     poster: 0,   //商品生成的海报 0未生成， str海报地址
     imageBase64: '',  //小程序码
     dataText: '商品海报',
@@ -34,6 +35,7 @@ Page({
     this.setData({
       int: false,
       maps: true,
+      stort: 0
     })
   },
 
@@ -52,15 +54,16 @@ Page({
 
   //新建分享海报
   onShop: function(){
+    console.log(this.data.poster)
     // 1用户打印自己的海报 2点赞的用户打印自己的海报   
-    if (this.data.userId == String(app.globalData.userInfo.id)){ 
+    if (this.data.userId == String(app.globalData.userInfo.id) && this.data.poster != 0 ){ 
       console.log('用户自己的海报', this.data.poster, '二维码', this.data.imageBase64)
       this.dowImg(this.data.poster)
     }else{  //生成游客海报
       
       // 二维码生成参数
       let params = {
-        path: 'pages/goods/goods?id=' + this.data.goodsid + '&userid=' + app.globalData.userInfo.id + '&stort=' + this.data.stort,
+        path: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + app.globalData.userInfo.id + '&stort=1',
         width: 250
       }
       rwm(params).then((r, j) => {
@@ -79,7 +82,36 @@ Page({
           this.setData({
             poster: r
           })
-          this.onIntsAdd()  //用户点赞
+          let objs = {
+            userId: String(app.globalData.userInfo.id), // 用户id
+            goodsId: this.data.goodsId,    //商品id
+            item: app.globalData.userInfo.avatarUrl,   //用户头像
+            poster: this.data.poster    //海报
+          }
+          // 写入点赞用户
+          postActivityGet(res => {
+            // 查询是否有
+            console.log('新建分享数据', res)
+            if (typeof (res.data) == 'string') {
+              let objs = {
+                recordID: res.data,
+                item: app.globalData.userInfo.avatarUrl
+                // poster: this.data.poster
+              }
+              postActivityAdd((res) => {
+                console.log('写入成功', res.data)
+                this.setData({
+                  poster: res.data.poster
+                })
+
+              }, objs)
+            } else {
+              this.setData({
+                // intli: res.data.data.userImg,
+                poster: res.data.data.poster
+              })
+            }
+          }, objs)
           this.dowImg(r)    //下载
         })
       })
@@ -127,9 +159,10 @@ Page({
     })
   },
 
+
   // 分享点赞
   onIntsAdd: function(){
-    let obj ={
+    let obj = {
       userId: this.data.userId, // 用户id
       goodsId: this.data.goodsId,    //商品id
       item: app.globalData.userInfo.avatarUrl,   //用户头像
@@ -200,7 +233,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('商品详情页', options)
+    console.log('商品详情页cs', options)
 
     // 页面初始化 夹在坐标， 设置详情页 
     getGoodsCent(res => { 
@@ -263,6 +296,7 @@ Page({
           intli: res.objects[0].userImg,  //点赞用户集合
           poster: res.objects[0].poster  //生成海报
         })
+        console.log('点赞用户：', res.objects[0].userImg, '海报', res.objects[0].poster )
       }
     }, { userId: String(options.userid), goodsId: options.id })
 
@@ -284,6 +318,23 @@ Page({
               that.setData({
                 info: false
               })
+              // console.log('头像',app.globalData.userInfo.avatarUrl)
+              // wx.downloadFile({
+              //   url: app.globalData.userInfo.avatarUrl, //仅为示例，并非真实的资源
+              //   success: function (res) {
+              //     console.log('下载用户头像', res)
+              //     hez.upload(that,res=>{
+              //       // console.log('上传头像', res.data.path) 
+              //       that.setData({
+              //         userImg: res.data.path
+              //       })
+              //     }, res.tempFilePath, '头像')
+              //   },
+              //   fail: function(err){
+              //     console.log('下载',err)
+              //   }
+                
+              // })
             }
           })
         } else {

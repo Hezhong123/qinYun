@@ -47,7 +47,7 @@ Page({
     let ins =e.currentTarget.dataset.cs
     console.log(ins)
     wx.navigateTo({
-      url: '../../pages/goodsA/goodsA?id=' + ins + '&userid=' + 0 + '&stort='+0 
+      url: '../../pages/goodsA/goodsA?id=' + ins + '&userid=' + String(app.globalData.userInfo.id) + '&stort='+0 
     })
   },
 
