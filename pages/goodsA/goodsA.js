@@ -46,6 +46,12 @@ Page({
     })
   },
 
+  // 隐藏积攒
+  offInt: function(){
+    this.setData({
+      stort: 0
+    })
+  },
 
   // 客服
   onKf: function(e){
