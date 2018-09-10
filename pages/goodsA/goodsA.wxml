@@ -105,9 +105,10 @@
 
     <!-- 购买 -->
     <view class=' brRinght'>
-      <view class='goodsRing' bindtap='onShop'>
-          {{dataText}}
-      </view>
+      <form bindsubmit="onShop" report-submit="{{true}}" >
+          
+          <button formType="submit" class='goodsRing'  > {{dataText}} </button>  
+      </form>
     </view>
 
     

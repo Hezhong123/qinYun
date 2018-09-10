@@ -54,4 +54,12 @@
     </view>
   </view> -->
 
+
+  <view>
+    <form  bindsubmit="onSubit" report-submit="{{true}}" >
+      <button formType="submit" > 发送模版消息</button>
+    </form>
+    
+  </view>
+
 </view>

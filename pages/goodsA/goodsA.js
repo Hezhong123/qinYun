@@ -2,7 +2,7 @@ const app = getApp()
 import hez from '../../utils/hez.js'
 const wxParser = require('../../wxParser/index');
 const config = app.globalData 
-import { getGoodsCent, postActivity, postActivityAdd, postActivityGet, userCollect, getHome, addPoster, rwm, postImg} from '../../utils/api.js'
+import { getGoodsCent, postActivity, postActivityAdd, postActivityGet, userCollect, getHome, addPoster, rwm, postImg, sendTemp} from '../../utils/api.js'
 // pages/goods/goods.js
 Page({
 
@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    datas: "",  //富文本
+    datas: "",  //商品信息
     markers: '',   //地图
     stort: 0,   //页面状态 0普通 1积赞 2拼团
     userId: '',   //点赞用户id
@@ -58,15 +58,49 @@ Page({
     console.log(e)
   },
 
+  // 发送模版消息
+  postSendTemp: function(e){
+    wx.BaaS.wxReportTicket(e.detail.formId)
+    let obj = {
+      userId: app.globalData.userInfo.id,
+      templateId: "mjbjBFupibsBjN0pz2w-X3W1xQuLsqXCoJRGW1-rt1c",
+      formData: {
+        keyword1: {
+          value: this.data.datas.sales,
+        },
+        keyword2: {
+          value: this.data.datas.description,
+        },
+        keyword3: {
+          value: this.data.datas.store,
+        },
+        keyword3: {
+          value: this.data.datas.brand,
+        },
+        keyword4: {
+          value: this.data.datas.store,
+        }
+      },
+      page: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + this.data.userId + '&stort=1'
+
+    }
+    console.log('模版信息', obj)
+    sendTemp(res => {
+      console.log(res)
+    }, obj)
+  },
+
   //新建分享海报
-  onShop: function(){
-    console.log(this.data.poster)
+  onShop: function(e){
+    // 发送模版消息
+    this.postSendTemp(e)
+
+    // console.log(this.data.poster, e.detail.formId)
     // 1用户打印自己的海报 2点赞的用户打印自己的海报   
     if (this.data.userId == String(app.globalData.userInfo.id) && this.data.poster != 0 ){ 
       console.log('用户自己的海报', this.data.poster, '二维码', this.data.imageBase64)
       this.dowImg(this.data.poster)
     }else{  //生成游客海报
-      
       // 二维码生成参数
       let params = {
         path: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + app.globalData.userInfo.id + '&stort=1',

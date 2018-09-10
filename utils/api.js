@@ -170,3 +170,19 @@ export const rwm = (a) => new Promise((r,j)=>{
     j(err)
   })
 })
+
+
+// 发送模版消息
+export const sendTemp = (cd,obj)=>{
+  wx.showLoading({
+    title: '加载中',
+  })
+  wx.BaaS.invokeFunction('sendTemp', obj ).then(res => {
+    console.log('res88' , res)
+    // cd(res)
+
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+} 

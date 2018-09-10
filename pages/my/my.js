@@ -2,7 +2,7 @@
 const app = getApp()
 import hez from '../../utils/hez.js'
 const config = app.globalData 
-import { postUserCollect, rmUserCollect } from '../../utils/api.js'
+import { postUserCollect, rmUserCollect, sendTemp } from '../../utils/api.js'
 
 Page({
 
@@ -16,6 +16,17 @@ Page({
     offset: 0  //商品页码
     
   },
+
+  // 发送模版信息
+  onSubit: function(e){
+    console.log(e.detail.formId)
+    wx.BaaS.wxReportTicket(e.detail.formId)
+    sendTemp(res => {
+        console.log(res)
+    }, { formId: e.detail.formId} )
+
+  },
+
 
   ontab:function(e){
     let ins = e.currentTarget.dataset.obj
