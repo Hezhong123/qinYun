@@ -97,8 +97,9 @@ Page({
 
   // 进入首页
   onHome:function(){
-    wx.navigateTo({
-      url: '../../pages/index/index?'
+    console.log(111)
+    wx.switchTab({
+      url: '../../pages/index/index'
     })
   },
 
