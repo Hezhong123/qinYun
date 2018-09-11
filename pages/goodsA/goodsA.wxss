@@ -23,7 +23,7 @@
   height: 27px;
 }
 .iocsLeft{
-  margin-left: 25px;
+  margin-left: 15px;
 }
 
 .goodst2{
@@ -103,10 +103,14 @@ map{
 .intBoy{
   margin: 15px 0;
   display: flex;
+  /* flex-direction: row; */
+  width: 100%;
+  /* background-color: #000; */
   justify-content: space-around;
 }
 
 .bnt1{
+  display: initial;
   background-color: #01eb7c;
   color: #fff;
   padding: 3px 15px;
@@ -115,6 +119,7 @@ map{
 }
 
 .bnt2{
+  display: initial;
   border: 1px solid #bbbbbb;
   background-color: #fff;
   color: #bbbbbb;
@@ -136,7 +141,15 @@ map{
   color: #bfbfbf;
   text-align: center;
   letter-spacing: 2px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+}
+.txNumS{
+  /* line-height: 30px; */
+  color: #eee;
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 0.7rem;
+  margin-bottom: 20px;
 }
 
 .intTit{
@@ -160,29 +173,49 @@ map{
   justify-content: space-around ;
 }
 
+.brRinght{
+  margin-top: 2px;
+  flex: 1;
+  margin-right: 25px;
+  display: flex;
+}
+
+.froms{
+  width: 100%;
+}
+
 .goodsRing{
-  margin-right: 20px;
-  background-color: #01eb7c;
-  color: #fff;
-  padding: 5px 10px;
-  border: 1px solid #fff;
+  /* margin-right: 15px; */
+  /* background-color: #01eb7c; */
+  color: #01eb7c;
+  padding: 10px 5px;
+  border: 1px solid #01eb7c;
   text-align: center;
   letter-spacing: 2px;
-  line-height: 35px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.goodsRing1{
+  flex: 1;
+  display: block;
+  font-weight: 600;
+  background-color: #01eb7c;
+  color: #fff;
+  letter-spacing: 2px;
+  font-size: 1rem;
   border-radius: 20px; 
+  box-shadow: 1px 1px 2px #eee;
 }
 
 .brLeft{
-  flex: 3;
+  flex: 1;
   display: flex;
   align-items: center;
   margin-left: 15px;
 }
 
-.brRinght{
-  flex: 2;
-}
+
 
 /* 模态框 */
 .mtk{

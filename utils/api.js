@@ -131,7 +131,7 @@ export const rmUserCollect = (cd,obj) => {
 // 生产海报
 export const addPoster = (a)  => new Promise((r,j) => {
   wx.showLoading({
-    title: '生成中',
+    title: '请稍等',
   })
   setTimeout(function () {
     wx.hideLoading()
@@ -186,3 +186,34 @@ export const sendTemp = (cd,obj)=>{
     console.log(err)
   })
 } 
+
+
+// 核销用户点赞
+export const destructionGoods = (cd, obj) => {
+  wx.showLoading({
+    title: '核销中',
+  })
+  wx.BaaS.invokeFunction('destructionGoods', obj).then(res => {
+    // console.log('res', res)
+    cd(res)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+} 
+
+
+// 查询用户分享海报
+
+export const getActovotyPoster = (cd, obj) => {
+  wx.showLoading({
+    title: '生成中',
+  })
+  wx.BaaS.invokeFunction('getActovotyPoster', obj).then(res => {
+    // console.log('res', res)
+    cd(res)
+    wx.hideLoading()
+  }, err => {
+    console.log(err)
+  })
+}

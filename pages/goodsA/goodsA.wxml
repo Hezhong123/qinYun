@@ -50,7 +50,7 @@
       </view>
       <view class='intRom' >
         <view class='txBody' wx:for="{{intli}}" wx:key='id' > 
-          <image class='intTx' src='{{intli[index]}}'></image>
+          <image class='intTx' src='{{intli[index]}}'></image>          
           <!-- <text class='intTit'>1212</text> -->
         </view>
        
@@ -58,15 +58,18 @@
 
      <view class='txNum' > 已有 {{intli.length}} 位好朋友为我点赞</view>
      
-      <view class='intBoy'>
-        <view class='bnt1' bindtap='onIntsAdd'>
-          点赞
-        </view>
-        <view  class='bnt2' bindtap='useMk'>
-          MK
-        </view>
+    <!-- 操作栏 -->
+    <view class='intBoy'>
+      <form  bindsubmit="onIntsAdd"  report-submit="{{true}}" >
+        <button class='bnt1' formType="submit" >点赞</button>
+      </form>
+      <form bindsubmit="useMk"  report-submit="{{true}}" >
+        <button class='bnt2' formType="submit" >分享海报</button>
+      </form>
+    </view>
 
-      </view>
+      <!-- 说明文件 -->
+      <view class='txNumS' bindtap='startMk' > 青语MK 使用说明 </view>
 
     </view>
   </view>
@@ -76,8 +79,14 @@
   <!-- 页脚 -->
   <view class='goodsbar'>
     <view class='goodsleftBody brLeft'>
+      <!-- 首页 -->
+      <view class='goodsleft' bindtap='onHome' >
+         <image class='iocs' src='../../img/ico/tab/home1.png'></image>
+         <view class='goodst2' style='color: #01eb7c'> 首页 </view>
+      </view>
+
       <!-- 地图 -->
-      <view class='goodsleft' bindtap='onMap' >
+      <view class='goodsleft iocsLeft' bindtap='onMap' >
          <image class='iocs' src='../../img/ico/map.png'></image>
          <view class='goodst2'> 门店 </view>
       </view>
@@ -104,11 +113,17 @@
     </view>
 
     <!-- 购买 -->
-    <view class=' brRinght'>
-      <form bindsubmit="onShop" report-submit="{{true}}" >
-          
-          <button formType="submit" class='goodsRing'  > {{dataText}} </button>  
+    <view class='brRinght'>
+      <!-- 点赞 -->
+      <form bindsubmit="onShop" class='froms' report-submit="{{true}}" >
+          <!-- <button formType="submit" data-id='1' class='goodsRing'  > {{dataText}} </button>   -->
+          <button formType="submit" data-id='2' animation="{{animationData}}"  size="default" class='goodsRing1'  > ¥ {{ datas.price }} 拼团 </button>
       </form>
+      <!-- 评团 -->
+       <!-- <form bindsubmit="onShop" report-submit="{{true}}" >
+          
+            
+      </form> -->
     </view>
 
     
