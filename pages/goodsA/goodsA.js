@@ -2,7 +2,9 @@ const app = getApp()
 import hez from '../../utils/hez.js'
 const wxParser = require('../../wxParser/index');
 const config = app.globalData 
-import { getGoodsCent, postActivity, postActivityAdd, postActivityGet, userCollect, getHome, addPoster, rwm, postImg, sendTemp, destructionGoods, getActovotyPoster} from '../../utils/api.js'
+import { getGoodsCent, postActivity, postActivityAdd, postActivityGet, userCollect, getHome, addPoster, rwm, postImg, sendTemp, destructionGoods, getActovotyPoster, MyUser} from '../../utils/api.js'
+
+import { dowImgs, randomString } from '../../utils/config.js'
 // pages/goods/goods.js
 Page({
 
@@ -17,6 +19,7 @@ Page({
     goodsId: '',  //商品id
     intli: '',   //点赞用户
     userImg: '', //用户头像
+    btnShow: false, //分享按钮
     poster: 0,   //商品生成的海报 0未生成， str海报地址
     imageBase64: '',  //小程序码
     secret:'', //核销码
@@ -103,7 +106,7 @@ Page({
     })
   },
 
-  // 团购按钮
+  // 团购按钮动画
   pingBtn: function(){
     var animation = wx.createAnimation({
       duration: 800,
@@ -136,46 +139,12 @@ Page({
 
   // 下载图片
   dowImg: function(e){
-    wx.downloadFile({
-      url: e, //仅为示例，并非真实的资源
-      success: function (res) {
-        let dmw = res.tempFilePath
-        // 保存到本地
-        wx.saveImageToPhotosAlbum({
-          filePath: dmw ,
-          success(res) {
-            // 预览图片
-            wx.previewImage({
-              current: '', // 当前显示图片的http链接
-              urls: [dmw] // 需要预览的图片http链接列表
-            })
-            wx.showToast({
-              title: '保存到相册了',
-              icon: 'success',
-              duration: 2000
-            })
-          }
-        })
-        console.log('下载的图片',res)
-      }
-    })
+    dowImgs(e)
   },
-
-  // 用户信息
-  infos: function(e){
-    let infos = app.globalData.userInfo
-    let infod = e.detail.userInfo
-    let infoli = Object.assign(infos, infos)
-    console.log('用户信息', infoli )
-    app.globalData.userInfo = infoli
-    this.setData({
-      info: false
-    })
-  },
-
 
   // 分享点赞
   onIntsAdd: function(){
+    console.log('点赞')
     let obj = {
       userId: this.data.userId, // 用户id
       goodsId: this.data.goodsId,    //商品id
@@ -185,12 +154,11 @@ Page({
     // 写入点赞用户
     postActivityGet(res=>{
       // 查询是否有
-      console.log('点赞查询', res)
-      if (typeof (res.data) == 'string'){
+      console.log('点赞查询', res.data.data.id)
+      if (typeof (res.data.data.id) == 'string'){
         let objs = {
-          recordID: res.data,
+          recordID: res.data.data.id,
           item: app.globalData.userInfo.avatarUrl
-          // poster: this.data.poster
         }
         postActivityAdd((res) => {
           console.log('写入成功', res)
@@ -200,7 +168,7 @@ Page({
         },objs)
       }else{
         this.setData({
-          intli: res.data.data.userImg
+          intli: res.data.userImg
         })
       }
     },obj)
@@ -236,102 +204,9 @@ Page({
 
   // 分享海报
   useMk: function(e){
-    // 随机数生产
-    const randomString = (len, charSet) => {
-      charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      var randomString = '';
-      for (var i = 0; i < len; i++) {
-        var randomPoz = Math.floor(Math.random() * charSet.length);
-        randomString += charSet.substring(randomPoz, randomPoz + 1);
-      }
-      return randomString;
-    }
-
-    wx.showLoading({
-      title: '海报生成中...',
-    })
-
-    // 发送模版消息
-    const fromid = e.detail.formId
-    console.log('分享海报', this.data.poster )
-    
-
-    // 1用户打印自己的海报 2点赞的用户打印自己的海报
-    if (this.data.userId == String(app.globalData.userInfo.id)) {
-      console.log('用户自己的海报', this.data.poster, '二维码', this.data.imageBase64)
-      this.dowImg(this.data.poster)
-    } else if (this.data.userId != String(app.globalData.userInfo.id)){  //生成游客海报
-      getActovotyPoster(res => {
-        console.log('查询结果', res.data )
-        if (typeof (res.data) == 'string' ){
-          this.dowImg(res.data)
-        }else{
-          // 二维码生成参数
-          let params = {
-            path: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + app.globalData.userInfo.id + '&stort=1',
-            width: 250
-          }
-          rwm(params).then((r, j) => {
-            console.log('二维码参数', r)
-            // 海报生成参数
-            let obj = {
-              bj: this.data.datas.goosBj,
-              infos: app.globalData.userInfo.avatarUrl,
-              name: app.globalData.userInfo.nickName,
-              text: this.data.datas.title,
-              rwm: r,
-              goodsImg: this.data.datas.cover.path
-            }
-            // 生成海报
-            addPoster(obj).then((r, j) => {
-              this.setData({
-                poster: r
-              })
-              let objs = {
-                userId: String(app.globalData.userInfo.id), // 用户id
-                goodsId: this.data.goodsId,    //商品id
-                item: app.globalData.userInfo.avatarUrl,   //用户头像
-                poster: this.data.poster,    //海报
-                secret: randomString(6)
-              }
-              // 写入点赞用户
-              postActivityGet(res => {
-                // 查询是否有
-                // console.log('新建分享数据', res, '核销码',  this.data.secret )
-                if (typeof (res.data) == 'string') {
-                  let objs = {
-                    recordID: res.data,
-                    item: app.globalData.userInfo.avatarUrl,
-
-                    // poster: this.data.poster
-                  }
-                  postActivityAdd((res) => {
-                    console.log('写入成功', res.data)
-                    this.setData({
-                      poster: res.data.poster
-                    })
-
-                  }, objs)
-                } else {
-                  this.setData({
-                    // intli: res.data.data.userImg,
-                    poster: res.data.data.poster,
-                    secret: res.data.data.secret
-                  })
-                  this.postSendTemp(fromid)
-                }
-              }, objs)
-              this.dowImg(r)    //下载
-            })
-          })
-        }
-
-
-      }, { userId: String(app.globalData.userInfo.id), goodsId: this.data.goodsId})
-      
-
-    }
-  
+    let fromId = e.detail.formId
+    dowImgs(this.data.poster)
+    console.log('分享海报', fromId, this.data.poster)
   },
 
   // 拼团功能
@@ -364,6 +239,7 @@ Page({
         width: 30,
         height: 30
       }] //地图
+      
       
 
       // 默认值 图文，坐标， 用户id ， 商品id， zt
@@ -405,14 +281,15 @@ Page({
         })
     }, { offset: 0, classID: parseInt(1536221748898156) })
 
+   
+
     // 查询点过赞的用户
     postActivity(res => {
       console.log('点赞查询初始化', res)
       if (res.objects.length != 0) {
         this.setData({
           intli: res.objects[0].userImg,  //点赞用户集合
-          poster: res.objects[0].poster,  //生成海报
-          secret: res.objects[0].secret 
+          secret: res.objects[0].secret   //核销码
         })
         console.log('点赞用户：', res.objects[0].userImg, '海报', res.objects[0].poster)
 
@@ -463,27 +340,6 @@ Page({
               let infoli = Object.assign(infos, infos)
               console.log('授权用户信息', infoli)
               app.globalData.userInfo = infoli
-              that.setData({
-                info: false
-              })
-              // console.log('头像', that.data.intli)
-              // wx.downloadFile({
-              //   url: that.data.intli[0], //仅为示例，并非真实的资源
-              //   success: function (res) {
-                  
-              //     let arrs= []
-              //     arrs.push(res.tempFilePath)
-              //     that.setData({
-              //       avatarUrl: arrs
-              //     })
-              //     console.log('下载用户头像', res,arrs)
-              //   },
-              //   fail: function(err){
-              //     console.log('下载',err)
-              //   }
-                
-              // })
-
             }
           })
         } else {
@@ -494,7 +350,50 @@ Page({
       }
     })
 
-    
+    // 查询用户是否生成过海报
+    getActovotyPoster(res => {
+      console.log('查询用户是否参加过活动', res)
+      if(typeof(res.data) == 'string'){
+        this.setData({
+          poster: res.data,
+          btnShow: true
+        })
+      }else{
+        // 二维码参数
+        let params = {
+          path: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + app.globalData.userInfo.id + '&stort=1',
+          width: 250
+        }
+        rwm(params).then((r, j) => {
+          // 生成海报参数
+          let obj = {
+            bj: this.data.datas.goosBj,
+            infos: app.globalData.userInfo.avatarUrl,
+            name: app.globalData.userInfo.nickName,
+            text: this.data.datas.title,
+            rwm: r,
+            goodsImg: this.data.datas.cover.path
+          }
+          addPoster(obj).then((r, h) => {
+            let objs = {
+              userId: String(app.globalData.userInfo.id), // 用户id
+              goodsId: this.data.goodsId,    //商品id
+              item: app.globalData.userInfo.avatarUrl,   //用户头像
+              poster: r,    //海报
+              secret: randomString(6)
+            }
+            // 写入点赞用户
+            postActivityGet(res => {
+              this.setData({
+                poster: res.data.data.poster,
+                secret: res.data.data.secret,
+                btnShow: true
+              })
+            }, objs)
+          })
+        })
+      } 
+    }, { userId: String(app.globalData.userInfo.id), goodsId: options.id })
     
   },  
 

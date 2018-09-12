@@ -63,7 +63,7 @@
       <form  bindsubmit="onIntsAdd"  report-submit="{{true}}" >
         <button class='bnt1' formType="submit" >点赞</button>
       </form>
-      <form bindsubmit="useMk"  report-submit="{{true}}" >
+      <form bindsubmit="useMk"  report-submit="{{true}}"  wx:if = "{{btnShow}}" >
         <button class='bnt2' formType="submit" >分享海报</button>
       </form>
     </view>
@@ -104,12 +104,19 @@
          <image class='iocs' bindtap='onCollect' src='../../img/ico/sc.png'></image>
          <view class='goodst2'> 收藏 </view>
       </view>
+
+      <!-- 分享 -->
+      <view class='goodsleft iocsLeft ' wx:if = "{{btnShow}}">
+         <image class='iocs' bindtap='useMk' src='../../img/ico/share.png'></image>
+         <view class='goodst2'> 分享 </view>
+      </view>
       
       <!-- 积分 -->
-      <view class='goodsleft iocsLeft' bindtap='onInt' wx:if="{{0}}" >
+      <!-- <view class='goodsleft iocsLeft' bindtap='onInt' wx:if = "{{btnShow}}" >
         <image class='iocs' src='../../img/ico/share.png'></image>
         <view class='goodst2'>分享</view>
-      </view>
+      </view> -->
+      
     </view>
 
     <!-- 购买 -->
