@@ -117,7 +117,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    // 商品信息
+    getHome((res) => {
+      console.log('商品', res)
+      wx.stopPullDownRefresh()
+      this.setData({
+        datas: res.objects
+      })
+    }, { offset: 0, classID: parseInt(this.data.classID) })
   },
 
   /**
@@ -138,12 +145,12 @@ Page({
       } else {
         this.setData({
           datas: datasli,
-          offset: this.data.offset + 2
+          offset: this.data.offset + 10
         })
       }
       console.log('商品', res, this.data.offset, this.data.classID)
 
-    }, { offset: this.data.offset + 2, classID: parseInt(this.data.classID) })
+    }, { offset: this.data.offset + 10, classID: parseInt(this.data.classID) })
   },
 
   /**

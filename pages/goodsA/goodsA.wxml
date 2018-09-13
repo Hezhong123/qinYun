@@ -106,10 +106,10 @@
       </view>
 
       <!-- 分享 -->
-      <view class='goodsleft iocsLeft ' wx:if = "{{btnShow}}">
+      <!-- <from class='goodsleft iocsLeft ' wx:if = "{{btnShow}}">
          <image class='iocs' bindtap='useMk' src='../../img/ico/share.png'></image>
          <view class='goodst2'> 分享 </view>
-      </view>
+      </from> -->
       
       <!-- 积分 -->
       <!-- <view class='goodsleft iocsLeft' bindtap='onInt' wx:if = "{{btnShow}}" >
@@ -122,9 +122,9 @@
     <!-- 购买 -->
     <view class='brRinght'>
       <!-- 点赞 -->
-      <form bindsubmit="onShop" class='froms' report-submit="{{true}}" >
+      <form bindsubmit="useMk" class='froms' report-submit="{{true}}" >
           <!-- <button formType="submit" data-id='1' class='goodsRing'  > {{dataText}} </button>   -->
-          <button formType="submit" data-id='2' animation="{{animationData}}"  size="default" class='goodsRing1'  > ¥ {{ datas.price }} 拼团 </button>
+          <button formType="submit" data-id='2' animation="{{animationData}}"  size="default" class='goodsRing1'  > {{btnShow? '分享海报': '加载中'}}  </button>
       </form>
       <!-- 评团 -->
        <!-- <form bindsubmit="onShop" report-submit="{{true}}" >
@@ -147,7 +147,7 @@
   <view class='intText'> 推荐商品 </view>
   <view class='rows'> 
     <view class='intItme' wx:for = "{{tDatas}}" wx:key = "1">
-      <image class='intImg' mode='center' bindtap='onGoods' data-cs='{{tDatas[index].id}}'  src='{{tDatas[index].cover.path}}' ></image>
+      <image class='intImg' mode='scaleToFill' bindtap='onGoods' data-cs='{{tDatas[index].id}}'  src='{{tDatas[index].cover.path}}' ></image>
       <text class='intTs'> {{tDatas[index].description}} </text>
     </view>
   

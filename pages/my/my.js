@@ -17,17 +17,6 @@ Page({
     
   },
 
-  // 发送模版信息
-  onSubit: function(e){
-    console.log(e.detail.formId)
-    wx.BaaS.wxReportTicket(e.detail.formId)
-    sendTemp(res => {
-        console.log(res)
-    }, { formId: e.detail.formId} )
-
-  },
-
-
   ontab:function(e){
     let ins = e.currentTarget.dataset.obj
     this.setData({
@@ -79,12 +68,12 @@ Page({
    */
   onReady: function () {
     // console.log('222323', app.globalData.userInfo.id)
-    postUserCollect(res =>{
-      console.log('喜欢商品', res.data.data.objects)
-      this.setData({
-        goodsLive: res.data.data.objects
-      })
-    }, { offset: this.data.offset, userId: String(app.globalData.userInfo.id)})
+    // postUserCollect(res =>{
+    //   console.log('喜欢商品', res)
+    //   this.setData({
+    //     goodsLive: res.data.data.objects
+    //   })
+    // }, { offset: this.data.offset, userId: String(app.globalData.userInfo.id)})
   },
 
   /**
@@ -117,7 +106,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    postUserCollect(res => {
+      console.log('喜欢商品', res)
+      wx.stopPullDownRefresh()
+      this.setData({
+        goodsLive: res.data.data.objects
+      })
+    }, { offset: this.data.offset, userId: String(app.globalData.userInfo.id) })
   },
 
   /**
@@ -142,7 +137,7 @@ Page({
         })
       }
       console.log('收藏商品', res.data.data.objects)
-    }, { offset: this.data.offset, userId: String(app.globalData.userInfo.id)})
+    }, { offset: this.data.offset + 10, userId: String(app.globalData.userInfo.id)})
   },
 
   /**

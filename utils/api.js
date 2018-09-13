@@ -75,12 +75,8 @@ export const postActivityAdd = (cd,obj) =>{
 
 // 新建点赞分享
 export const postActivityGet = (cd ,obj)=>{
-  wx.showLoading({
-    title: '加载中',
-  })
   wx.BaaS.invokeFunction('postActivityGet', obj).then(res => {
     cd(res)
-    wx.hideLoading()
   }, err => {
     console.log(err)
   })
@@ -89,7 +85,7 @@ export const postActivityGet = (cd ,obj)=>{
 //用户收藏
 export const userCollect = (cd, obj) => {
   wx.showLoading({
-    title: '加载中',
+    title: '收藏',
   })
   wx.BaaS.invokeFunction('userCollect', obj).then(res => {
     cd(res)
@@ -117,7 +113,7 @@ export const postUserCollect = (cd, obj) => {
 // 移除收藏商品
 export const rmUserCollect = (cd,obj) => {
   wx.showLoading({
-    title: '加载中',
+    title: '删除',
   })
   wx.BaaS.invokeFunction('rmUserCollect', obj).then(res => {
     // console.log('rss' , res)
@@ -139,7 +135,6 @@ export const addPoster = (a)  => new Promise((r,j) => {
     },
     method: 'POST',
     success: function (res) {
-      console.log('生成海报', res ) 
       r('https://' + res.data.cosImg.Location)
     },
     fail: function (err) {
@@ -166,9 +161,8 @@ export const sendTemp = (cd,obj)=>{
     title: '加载中',
   })
   wx.BaaS.invokeFunction('sendTemp', obj ).then(res => {
-    console.log('res88' , res)
+    console.log('发送模版消息' , res)
     // cd(res)
-
     wx.hideLoading()
   }, err => {
     console.log(err)
@@ -190,24 +184,9 @@ export const destructionGoods = (cd, obj) => {
   })
 } 
 
-
 // 查询用户分享海报
-
 export const getActovotyPoster = (cd, obj) => {
-  wx.showLoading({
-    title: '加载...',
-  })
   wx.BaaS.invokeFunction('getActovotyPoster', obj).then(res => {
-    // console.log('res', res)
-    cd(res)
-    wx.hideLoading()
-  }, err => {
-    console.log(err)
-  })
-}
-
-export const MyUser = (cd, obj) => {
-  wx.BaaS.invokeFunction(MyUser, obj).then(res => {
     // console.log('res', res)
     cd(res)
     wx.hideLoading()

@@ -23,7 +23,7 @@
   height: 27px;
 }
 .iocsLeft{
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .goodst2{
@@ -199,7 +199,7 @@ map{
 .goodsRing1{
   flex: 1;
   display: block;
-  font-weight: 600;
+  font-weight: 800;
   background-color: #01eb7c;
   color: #fff;
   letter-spacing: 2px;
@@ -271,7 +271,7 @@ map{
 
 .intImg{
   width: 43vw;
-  height: 45vw;
+  height: 26vw;
   background-color: #bfbfbf;
   border-radius: 5px; 
 }

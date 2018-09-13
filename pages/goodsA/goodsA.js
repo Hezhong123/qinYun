@@ -66,7 +66,7 @@ Page({
 
   // 发送模版消息 参加活动
   postSendTemp: function(e){
-
+    
     wx.BaaS.wxReportTicket(e)
    
     let obj = {
@@ -158,7 +158,8 @@ Page({
       if (typeof (res.data.data.id) == 'string'){
         let objs = {
           recordID: res.data.data.id,
-          item: app.globalData.userInfo.avatarUrl
+          userId: String(app.globalData.userInfo.id),
+          // item: app.globalData.userInfo.avatarUrl
         }
         postActivityAdd((res) => {
           console.log('写入成功', res)
@@ -204,9 +205,11 @@ Page({
 
   // 分享海报
   useMk: function(e){
+    console.log('分享海报', fromId)
     let fromId = e.detail.formId
     dowImgs(this.data.poster)
-    console.log('分享海报', fromId, this.data.poster)
+    this.postSendTemp(fromId)  //发送模版消息
+    
   },
 
   // 拼团功能
@@ -353,18 +356,14 @@ Page({
     // 查询用户是否生成过海报
     getActovotyPoster(res => {
       console.log('查询用户是否参加过活动', res)
-      if(typeof(res.data) == 'string'){
-        this.setData({
-          poster: res.data,
-          btnShow: true
-        })
-      }else{
+      if (res.data.data.objects.length == 0 ){
         // 二维码参数
         let params = {
           path: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + app.globalData.userInfo.id + '&stort=1',
           width: 250
         }
         rwm(params).then((r, j) => {
+          console.log('生成二维码',r)
           // 生成海报参数
           let obj = {
             bj: this.data.datas.goosBj,
@@ -375,6 +374,7 @@ Page({
             goodsImg: this.data.datas.cover.path
           }
           addPoster(obj).then((r, h) => {
+            console.log('获取海报', r)
             let objs = {
               userId: String(app.globalData.userInfo.id), // 用户id
               goodsId: this.data.goodsId,    //商品id
@@ -384,6 +384,7 @@ Page({
             }
             // 写入点赞用户
             postActivityGet(res => {
+              console.log('写入成功', res)
               this.setData({
                 poster: res.data.data.poster,
                 secret: res.data.data.secret,
@@ -391,6 +392,11 @@ Page({
               })
             }, objs)
           })
+        })
+      }else{
+        this.setData({
+          poster: res.data.data.objects[0].poster,
+          btnShow: true
         })
       } 
     }, { userId: String(app.globalData.userInfo.id), goodsId: options.id })
