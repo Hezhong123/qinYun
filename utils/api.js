@@ -47,9 +47,9 @@ export const getGoodsCent = (cd, obj) =>{
 
 // 获取以点赞用户
 export const postActivity = (cd ,obj) => {
-  wx.showLoading({
-    title: '加载中',
-  })
+  // wx.showLoading({
+  //   title: '加载中',
+  // })
   wx.BaaS.invokeFunction('postActivity', obj).then(res => {
     cd(res.data.data)
     wx.hideLoading()
@@ -62,7 +62,7 @@ export const postActivity = (cd ,obj) => {
 //点赞助力
 export const postActivityAdd = (cd,obj) =>{
   wx.showLoading({
-    title: '加载中',
+    title: '点赞',
   })
   wx.BaaS.invokeFunction('postActivityAdd', obj).then(res => {
     cd(res.data)
@@ -126,6 +126,9 @@ export const rmUserCollect = (cd,obj) => {
 
 // 生产海报
 export const addPoster = (a)  => new Promise((r,j) => {
+  wx.showLoading({
+    title: '大吉大利',
+  })
   let that = this
   wx.request({
     url: 'https://api.hez.fun/cimg', //仅为示例，并非真实的接口地址
@@ -146,6 +149,9 @@ export const addPoster = (a)  => new Promise((r,j) => {
 
 // 生成二维码 
 export const rwm = (a) => new Promise((r,j)=>{
+  wx.showLoading({
+    title: '生成专属二维码',
+  })
   wx.BaaS.getWXACode('wxacode', a, true).then(res => {
     r(res.download_url)
   }).catch(err => {

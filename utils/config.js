@@ -2,7 +2,6 @@
 
 // 下载图片，保存到本地
 export const dowImgs = (urls) => {
-  wx.hideLoading()
   wx.downloadFile({
     url: urls, //仅为示例，并非真实的资源
     success: function (res) {
@@ -30,7 +29,8 @@ export const dowImgs = (urls) => {
 
 // 随机数生成
 export const randomString = (len, charSet)=>{
-  charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  // charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  charSet = charSet || '0123456789';
   var randomString = '';
   for (var i = 0; i < len; i++) {
     var randomPoz = Math.floor(Math.random() * charSet.length);

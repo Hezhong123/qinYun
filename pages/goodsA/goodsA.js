@@ -203,13 +203,62 @@ Page({
     })
   },
 
+  // 生成海报
+  haiBos: function(fromid){
+    const fromID = fromid
+    wx.showLoading({
+      title: '生成海报中...',
+    })
+
+    // 二维码参数
+    let params = {
+      path: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + app.globalData.userInfo.id + '&stort=1',
+      width: 250
+    }
+    rwm(params).then((r, j) => {
+      console.log('生成二维码', r)
+      // 生成海报参数
+      let obj = {
+        bj: this.data.datas.goosBj,
+        infos: app.globalData.userInfo.avatarUrl,
+        name: app.globalData.userInfo.nickName,
+        text: this.data.datas.title,
+        rwm: r,
+        goodsImg: this.data.datas.cover.path
+      }
+      addPoster(obj).then((r, h) => {
+        console.log('获取海报', r)
+        dowImgs(r)  //下载图片
+        let objs = {
+          userId: String(app.globalData.userInfo.id), // 用户id
+          goodsId: this.data.goodsId,    //商品id
+          item: app.globalData.userInfo.avatarUrl,   //用户头像
+          poster: r,    //海报
+          secret: randomString(6)
+        }
+        // 写入点赞用户
+        postActivityGet(res => {
+          console.log('写入成功', res)
+          this.setData({
+            poster: res.data.data.poster,
+            secret: res.data.data.secret,
+            btnShow: true
+          })
+          this.postSendTemp(fromID)  //发送模版消息
+        }, objs)
+      })
+    })
+  },
+
   // 分享海报
   useMk: function(e){
-    console.log('分享海报', fromId)
     let fromId = e.detail.formId
-    dowImgs(this.data.poster)
-    this.postSendTemp(fromId)  //发送模版消息
-    
+    console.log('分享海报', fromId, this.data.poster)
+    if (this.data.poster == 0){
+      this.haiBos(fromId)
+    }else{
+      dowImgs(this.data.poster)
+    }
   },
 
   // 拼团功能
@@ -357,46 +406,12 @@ Page({
     getActovotyPoster(res => {
       console.log('查询用户是否参加过活动', res)
       if (res.data.data.objects.length == 0 ){
-        // 二维码参数
-        let params = {
-          path: 'pages/goodsA/goodsA?id=' + this.data.goodsId + '&userid=' + app.globalData.userInfo.id + '&stort=1',
-          width: 250
-        }
-        rwm(params).then((r, j) => {
-          console.log('生成二维码',r)
-          // 生成海报参数
-          let obj = {
-            bj: this.data.datas.goosBj,
-            infos: app.globalData.userInfo.avatarUrl,
-            name: app.globalData.userInfo.nickName,
-            text: this.data.datas.title,
-            rwm: r,
-            goodsImg: this.data.datas.cover.path
-          }
-          addPoster(obj).then((r, h) => {
-            console.log('获取海报', r)
-            let objs = {
-              userId: String(app.globalData.userInfo.id), // 用户id
-              goodsId: this.data.goodsId,    //商品id
-              item: app.globalData.userInfo.avatarUrl,   //用户头像
-              poster: r,    //海报
-              secret: randomString(6)
-            }
-            // 写入点赞用户
-            postActivityGet(res => {
-              console.log('写入成功', res)
-              this.setData({
-                poster: res.data.data.poster,
-                secret: res.data.data.secret,
-                btnShow: true
-              })
-            }, objs)
-          })
+        this.setData({
+          poster: 0
         })
       }else{
         this.setData({
-          poster: res.data.data.objects[0].poster,
-          btnShow: true
+          poster: res.data.data.objects[0].poster
         })
       } 
     }, { userId: String(app.globalData.userInfo.id), goodsId: options.id })

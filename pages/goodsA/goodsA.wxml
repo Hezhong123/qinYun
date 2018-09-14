@@ -63,7 +63,7 @@
       <form  bindsubmit="onIntsAdd"  report-submit="{{true}}" >
         <button class='bnt1' formType="submit" >点赞</button>
       </form>
-      <form bindsubmit="useMk"  report-submit="{{true}}"  wx:if = "{{btnShow}}" >
+      <form bindsubmit="useMk"  report-submit="{{true}}">
         <button class='bnt2' formType="submit" >分享海报</button>
       </form>
     </view>
@@ -124,7 +124,7 @@
       <!-- 点赞 -->
       <form bindsubmit="useMk" class='froms' report-submit="{{true}}" >
           <!-- <button formType="submit" data-id='1' class='goodsRing'  > {{dataText}} </button>   -->
-          <button formType="submit" data-id='2' animation="{{animationData}}"  size="default" class='goodsRing1'  > {{btnShow? '分享海报': '加载中'}}  </button>
+          <button formType="submit" data-id='2' animation="{{animationData}}"  size="default" class='goodsRing1'  >分享海报 </button>
       </form>
       <!-- 评团 -->
        <!-- <form bindsubmit="onShop" report-submit="{{true}}" >
