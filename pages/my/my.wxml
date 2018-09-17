@@ -54,5 +54,9 @@
     </view>
   </view> -->
 
+  <form bindsubmit='onpaly'>
+    <button formType="submit"  >微信支付</button>
+  </form>
+
 
 </view>

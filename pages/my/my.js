@@ -63,6 +63,29 @@ Page({
 
   },
 
+  // 微信支付
+  onpaly: function(){
+    console.log(11)
+    let params = {
+      totalCost: 0.01,
+      merchandiseDescription: '深蓝色秋裤'
+    }
+
+    wx.BaaS.pay(params).then(res => {
+      // success. 支付请求成功响应，可以在 res 中拿到 transaction_no 和支付结果信息
+      /* 1.1.4 以下版本：
+        如果支付失败, 则可以获取失败原因
+        注: 只要是服务器有返回的情况都会进入 success, 即便是 4xx，5xx 都会进入
+            所以非系统级别错误导致的支付失败也会进入这里, 例如用户取消，参数错误等
+            这是微信的处理方式与 BaaS 服务(器)无关
+      */
+      console.log('支付成功', res) 
+    }, err => {
+      // 未完成用户授权或发生网络异常等
+      console.log('111', err)
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
