@@ -68,7 +68,7 @@ Page({
     console.log(app)
     // 商品分类
     goodsCLass((res)=>{
-      console.log('商品分类：', res.objects)
+      console.log('商品分类：', res)
       this.setData({
         classtab: res.objects,
         classID: res.objects[1].classID,

@@ -122,6 +122,7 @@ Page({
 
   // 下载图片
   dowImg: function(e){
+    console.log(e)
     wx.downloadFile({
       url: e, //仅为示例，并非真实的资源
       success: function (res) {
